@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NeuroNest | Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-body page-soft-bg">
+
+<nav class="navbar">
+  <h2 class="logo">NeuroNest</h2>
+</nav>
+
+<h1>Screening Insights</h1>
+
+<div class="card">
+  <p><strong>Risk Level:</strong> <span id="risk"></span></p>
+  <p><strong>Score:</strong> <span id="score"></span></p>
+  <p id="message"></p>
+  <small id="disclaimer"></small>
+</div>
+
+<div class="card wide">
+  <h3>Understanding Your Responses</h3>
+  <div id="explanationContainer"></div>
+</div>
+
+<div class="card wide">
+  <h3>What You Can Do Next</h3>
+  <ul id="nextStepsList"></ul>
+</div>
+
+
+
+
+<script>
+  // Fetch stored screening result
+  const rawData = localStorage.getItem("screeningResult");
+
+  // Basic safety check
+  if (!rawData) {
+    document.body.innerHTML = `
+      <div style="text-align:center; padding:40px;">
+        <h2>No screening data found</h2>
+        <p>Please complete the screening before viewing results.</p>
+      </div>
+    `;
+  } else {
+    const data = JSON.parse(rawData);
+
+    // Core summary
+    document.getElementById("risk").innerText = data.riskLevel ?? "—";
+    document.getElementById("score").innerText = data.score ?? "—";
+    document.getElementById("disclaimer").innerText = data.disclaimer ?? "";
+
+    /* -----------------------------
+       KEY OBSERVATIONS SECTION
+    ------------------------------ */
+    const observationContainer = document.getElementById("explanationContainer");
+    observationContainer.innerHTML = "";
+
+    if (data.observations && data.observations.length > 0) {
+      data.observations.forEach(obs => {
+        const li = document.createElement("li");
+        li.innerText = obs;
+        observationContainer.appendChild(li);
+      });
+    } else {
+      observationContainer.innerHTML = `
+        <p style="color:#666;">
+          This screening did not highlight specific patterns that required further explanation.
+        </p>
+      `;
+    }
+
+    /* -----------------------------
+       WHAT YOU CAN DO NEXT
+    ------------------------------ */
+    const nextStepsContainer = document.getElementById("nextStepsList");
+    nextStepsContainer.innerHTML = "";
+
+    if (data.nextSteps && data.nextSteps.length > 0) {
+      data.nextSteps.forEach(step => {
+        const li = document.createElement("li");
+        li.innerText = step;
+        nextStepsContainer.appendChild(li);
+      });
+    }
+
+    /* -----------------------------
+       OPTIONAL VISUAL EMPHASIS
+       (Soft, non-alarming)
+    ------------------------------ */
+    const riskCard = document.getElementById("riskCard");
+    if (riskCard && data.riskLevel) {
+      riskCard.classList.add(data.riskLevel.toLowerCase());
+    }
+  }
+</script>
+
+
+
+
+</body>
+</html>

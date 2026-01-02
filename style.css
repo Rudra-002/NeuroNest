@@ -1,0 +1,190 @@
+.dashboard {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin: 40px auto;
+  max-width: 900px;
+}
+
+.card {
+  flex: 1;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 6px;
+  background: #ffffff;
+  text-align: center;
+}
+
+.disclaimer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 20px;
+}
+
+/* SCREENING PAGE STYLING */
+
+.screening-note {
+  max-width: 700px;
+  margin: 10px auto 30px;
+  font-size: 0.95rem;
+  color: #555;
+  text-align: center;
+}
+
+.screening-form {
+  max-width: 700px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+
+.question {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.question label {
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.question select {
+  padding: 8px;
+  font-size: 1rem;
+}
+
+.screening-form .btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+}
+
+/* Progress text */
+.progress-text {
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 15px;
+  color: #4a90e2;
+}
+
+/* Ribbon-style navbar */
+.navbar.ribbon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 30px;
+  background: #ffffff;
+  border-bottom: 2px solid #eaeaea;
+}
+
+/* Logo */
+.navbar .logo {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #0b3c5d;
+}
+
+/* Tabs container */
+.tabs {
+  display: flex;
+  gap: 10px;
+}
+
+/* Individual tab */
+.tab {
+  padding: 8px 16px;
+  text-decoration: none;
+  color: #555;
+  border-radius: 6px 6px 0 0; /* ribbon feel */
+  font-weight: 500;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+/* Hover effect */
+.tab:hover {
+  background: #f0f6ff;
+  color: #0b3c5d;
+}
+
+/* Active tab */
+.tab.active {
+  background: #e8f0ff;
+  color: #0b3c5d;
+  border-bottom: 3px solid #4a90e2;
+}
+
+.page-soft-bg {
+  background: linear-gradient(to bottom, #e8f6f8, #ffffff);
+  min-height: 100vh;
+}
+
+/* DASHBOARD PAGE STYLING */
+
+.dashboard-body {
+  padding: 40px 20px;
+}
+
+/* Header spacing */
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.dashboard-header h1 {
+  margin-bottom: 8px;
+}
+
+.dashboard-header p {
+  color: #555;
+  font-size: 0.95rem;
+}
+
+/* Card container */
+.dashboard {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px; /* THIS creates breathing room */
+}
+
+/* Cards */
+.card {
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+/* Wide cards (explanations) */
+.card.wide {
+  padding: 32px;
+}
+
+/* Emphasized values */
+.big-text {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+/* Observation list */
+#explanationContainer li {
+  margin-bottom: 10px;
+  line-height: 1.5;
+  color: #444;
+}
+
+/* Disclaimer */
+.disclaimer {
+  max-width: 900px;
+  margin: 40px auto 0;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #666;
+}

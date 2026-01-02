@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NeuroNest | Developmental Screening</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar ribbon">
+  <div class="logo">NeuroNest</div>
+
+  <div class="tabs">
+    <a href="index.html" class="tab">Home</a>
+    <a href="autism.html" class="tab">Autism Awareness</a>
+    <a href="screening.html" class="tab active">Screening</a>
+    <a href="journey.html" class="tab">Our Journey</a>
+  </div>
+</nav>
+
+
+  <!-- PAGE HEADER -->
+  <section>
+    <h1 style="text-align:center;">Developmental Screening</h1>
+    <p class="screening-note">
+      Please answer the following questions honestly.  
+      This tool is designed to support awareness and is <strong>not</strong> a medical diagnosis.
+    </p>
+  </section>
+
+  <!-- PROGRESS INDICATOR -->
+  <p id="progressText" class="progress-text">Question 1 of 6</p>
+
+  <!-- SCREENING FORM -->
+  <form id="screeningForm" class="screening-form">
+
+    <div class="question" data-step="1">
+      <label>🧠 Does the child respond to their name?</label>
+      <select id="q1">
+        <option value="0">Yes</option>
+        <option value="2">No</option>
+      </select>
+    </div>
+
+    <div class="question" data-step="2">
+      <label>👀 Does the child maintain eye contact?</label>
+      <select id="q2">
+        <option value="0">Yes</option>
+        <option value="2">No</option>
+      </select>
+    </div>
+
+    <div class="question" data-step="3">
+      <label>👉 Does the child use gestures like pointing or waving?</label>
+      <select id="q3">
+        <option value="0">Yes</option>
+        <option value="2">No</option>
+      </select>
+    </div>
+
+    <div class="question" data-step="4">
+      <label>🔁 Does the child show repetitive behaviors?</label>
+      <select id="q4">
+        <option value="0">No</option>
+        <option value="2">Yes</option>
+      </select>
+    </div>
+
+    <div class="question" data-step="5">
+      <label>🔊 Does the child react strongly to sounds or textures?</label>
+      <select id="q5">
+        <option value="0">No</option>
+        <option value="2">Yes</option>
+      </select>
+    </div>
+
+    <div class="question" data-step="6">
+      <label>🎭 Does the child engage in pretend or imaginative play?</label>
+      <select id="q6">
+        <option value="0">Yes</option>
+        <option value="2">No</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn">Analyze Results</button>
+
+  </form>
+
+  <!-- SCRIPT -->
+  <script src="script.js"></script>
+
+  <!-- PROGRESS LOGIC -->
+  <script>
+    const questions = document.querySelectorAll(".question");
+    const progressText = document.getElementById("progressText");
+    const total = questions.length;
+
+  questions.forEach((question, index) => {
+    const select = question.querySelector("select");
+
+    // Update when user focuses or clicks into a question
+    select.addEventListener("focus", () => {
+      progressText.innerText = `Question ${index + 1} of ${total}`;
+    });
+  });
+</script>
+
+</body>
+</html>
