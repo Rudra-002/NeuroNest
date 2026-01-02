@@ -188,3 +188,41 @@
   font-size: 0.85rem;
   color: #666;
 }
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container, .dashboard, .journey-block {
+  width: 100%;
+  max-width: 900px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .dashboard {
+    gap: 20px;
+  }
+
+  .card {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  button {
+    width: 100%;
+  }
+}
