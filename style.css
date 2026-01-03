@@ -244,3 +244,90 @@ p {
   }
 }
 
+/* Floating AI Button */
+#ai-float-button {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #6a5cff, #4fd1c5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  z-index: 9999;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#ai-float-button:hover {
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* Chatbot Panel */
+#chatbot-container {
+  position: fixed;
+  right: 100px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 320px;
+  height: 420px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  display: none;
+  flex-direction: column;
+  z-index: 9998;
+}
+#ai-float-button img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+  #ai-float-button {
+    right: 16px;
+    bottom: 16px;
+    top: auto;
+    transform: none;
+  }
+
+  #chatbot-container {
+    right: 16px;
+    bottom: 90px;
+    top: auto;
+    transform: none;
+    width: 90%;
+  }
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(106, 92, 255, 0.6); }
+  70% { box-shadow: 0 0 0 20px rgba(106, 92, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(106, 92, 255, 0); }
+}
+
+#ai-float-button {
+  animation: pulse 2.5s infinite;
+}
+
+#ai-float-button {
+  z-index: 999999 !important;
+  pointer-events: auto !important;
+}
+
+/* In case any parent overlay is blocking clicks */
+body * {
+  pointer-events: auto;
+}
+
+#ai-float-button img {
+  pointer-events: none;
+}
+

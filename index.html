@@ -90,5 +90,114 @@
     <a class="btn" href="screening.html">Start Screening</a>
   </section>
 
+  <!-- ================== LEISURE AI CHATBOT ================== -->
+
+<div id="ai-float-button">
+  <img src="Fevicon.png" alt="Talk To NeuroNest AI" />
+</div>
+
+<div id="chatbot-container" aria-live="polite">
+  <div id="chatbot-header">
+    NeuroNest AI
+    <span id="chatbot-close" aria-label="Close chat">✖</span>
+  </div>
+
+  <div id="chatbot-messages">
+    <div class="bot-message">
+      Hi 👋<br>
+      I’m here to support you.<br><br>
+      You can ask me anything — or choose one below:
+      <br><br>
+      • Learn about autism<br>
+      • Explore NeuroNest<br>
+      • Get guidance for families<br>
+      • Just talk
+    </div>
+  </div>
+
+  <div id="chatbot-input-area">
+    <input
+      type="text"
+      id="chatbot-input"
+      placeholder="Type here… take your time"
+    />
+    <button id="chatbot-send">Send</button>
+  </div>
+</div>
+
+<script>
+const aiFloatButton = document.getElementById("ai-float-button");
+const chatbotContainer = document.getElementById("chatbot-container");
+const chatbotClose = document.getElementById("chatbot-close");
+const chatbotSend = document.getElementById("chatbot-send");
+const chatbotInput = document.getElementById("chatbot-input");
+const chatbotMessages = document.getElementById("chatbot-messages");
+
+aiFloatButton.addEventListener("click", () => {
+  chatbotContainer.style.display = "flex";
+});
+
+chatbotClose.addEventListener("click", () => {
+  chatbotContainer.style.display = "none";
+});
+
+chatbotSend.onclick = sendMessage;
+
+chatbotInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    sendMessage();
+  }
+});
+
+async function sendMessage() {
+  const message = chatbotInput.value.trim();
+  if (!message) return;
+
+  addMessage(message, "user-message");
+  chatbotInput.value = "";
+
+  const loadingDiv = document.createElement("div");
+  loadingDiv.className = "bot-message";
+  loadingDiv.innerText = "Thinking gently… 🌱";
+  chatbotMessages.appendChild(loadingDiv);
+
+  chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+  try {
+    const response = await fetch("http://127.0.0.1:3000/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ message })
+    });
+
+    if (!response.ok) {
+  throw new Error("Server error");
+}
+
+    const data = await response.json();
+    loadingDiv.innerText = data.reply;
+  } catch (error) {
+    loadingDiv.innerText =
+      "I'm here with you, but something went wrong. Please try again 💙";
+  }
+
+  chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+}
+
+
+function addMessage(text, className) {
+  const div = document.createElement("div");
+  div.className = className;
+  div.innerHTML = text;
+  chatbotMessages.appendChild(div);
+  chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+}
+</script>
+
+
+
+
 </body>
 </html>
