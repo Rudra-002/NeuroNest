@@ -47,8 +47,33 @@ You may say things like:
 @app.route("/analyze", methods=["POST"])
 def analyze():
     data = request.json
-    result = analyze_screening(data)
+
+    if not data:
+        return jsonify({
+            "error": "No screening data received"
+        }), 400
+
+    try:
+        result = analyze_screening(data)
+    except Exception as e:
+        print("Analyze error:", e)
+        return jsonify({
+            "score": 0,
+            "riskLevel": "Error",
+            "summary": "Something went wrong while analyzing. Please try again.",
+            "recommendations": []
+        }), 500
+
+    if not isinstance(result, dict):
+        return jsonify({
+            "score": 0,
+            "riskLevel": "Unavailable",
+            "summary": "We couldn’t process the screening right now.",
+            "recommendations": []
+        })
+
     return jsonify(result)
+
 
 # --------------------
 # New AI Chat route (ADDED)
