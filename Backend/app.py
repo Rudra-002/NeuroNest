@@ -2,7 +2,8 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from ai_logic import analyze_screening
 
-import google.generativeai as genai
+from google import genai
+
 import os
 from dotenv import load_dotenv
 
@@ -17,9 +18,9 @@ load_dotenv()
 # --------------------
 # Gemini AI setup (FREE, no card)
 # --------------------
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
-gemini_model = genai.GenerativeModel("gemini-1.5-flash")
+
 
 LEISURE_AI_PROMPT = """
 You are NeuroNest AI, a calm, supportive, and empathetic assistant.
@@ -89,13 +90,16 @@ def chat():
         })
 
     try:
-        response = gemini_model.generate_content(
-            f"{LEISURE_AI_PROMPT}\n\nUser: {user_message}\nAssistant:"
-        )
+        response = client.models.generate_content(
+    model="gemini-1.5-flash",
+    contents=f"{LEISURE_AI_PROMPT}\n\nUser: {user_message}\nAssistant:"
+)
+
 
         return jsonify({
-            "reply": response.text
-        })
+    "reply": response.text
+})
+
 
     except Exception as e:
         return jsonify({

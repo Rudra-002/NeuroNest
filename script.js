@@ -3,6 +3,8 @@
 // ===============================
 
 // Make sure the form exists before attaching listener
+console.log("script.js loaded");
+
 const screeningForm = document.getElementById("screeningForm");
 
 if (screeningForm) {
