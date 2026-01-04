@@ -13,8 +13,10 @@ CORS(app)
 # Gemini Client (NEW SDK)
 # -------------------------------
 client = genai.Client(
-    api_key=os.getenv("GEMINI_API_KEY")
+    api_key=os.getenv("GEMINI_API_KEY"),
+    http_options={"api_version": "v1"}
 )
+
 
 # -------------------------------
 # AI System Prompt
@@ -98,7 +100,7 @@ def chat():
             })
 
         response = client.models.generate_content(
-            model="models/gemini-1.0-pro",
+            model="models/gemini-pro",
             contents=f"{LEISURE_AI_PROMPT}\n\nUser: {user_message}\nAssistant:"
         )
 
