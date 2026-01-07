@@ -2,6 +2,12 @@ import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from google import genai
+from dotenv import load_dotenv
+import traceback
+import json
+
+
+load_dotenv()  # load .env into environment
 
 # -------------------------------
 # App setup
@@ -12,9 +18,21 @@ CORS(app)
 # -------------------------------
 # Gemini Client (NEW SDK)
 # -------------------------------
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GEMINI_API_VERSION = os.getenv("GEMINI_API_VERSION", "v1")
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "models/gemini-2.5-pro")
+print("Using GEMINI_MODEL:", GEMINI_MODEL)
+if "embedding" in GEMINI_MODEL:
+    print("WARNING: GEMINI_MODEL is an embedding model and won't support generate_content.")
+
+
+if not GEMINI_API_KEY:
+    print("WARNING: GEMINI_API_KEY is not set. AI requests will fail. Add it to a local .env or environment variables.")
+print("Using GEMINI_MODEL:", GEMINI_MODEL)
+
 client = genai.Client(
-    api_key=os.getenv("GEMINI_API_KEY"),
-    http_options={"api_version": "v1"}
+    api_key=GEMINI_API_KEY,
+    http_options={"api_version": GEMINI_API_VERSION}
 )
 
 
@@ -85,38 +103,85 @@ def analyze():
             "recommendations": []
         }), 500
 
+
+@app.route("/models", methods=["GET"])
+def list_models():
+    try:
+        models = client.models.list()
+        names = []
+        if isinstance(models, dict):
+            for m in models.get("models", []):
+                names.append(m.get("name"))
+        else:
+            for m in models:  # SDK often returns iterable of model objects
+                names.append(getattr(m, "name", None) or (m.get("name") if isinstance(m, dict) else None))
+        return jsonify({"models": [n for n in names if n]})
+    except Exception as e:
+        import traceback; traceback.print_exc()
+        return jsonify({"error": str(e)}), 500
+
+
 # =====================================================
 # AI CHATBOT ROUTE
 # =====================================================
 @app.route("/chat", methods=["POST"])
 def chat():
     try:
-        data = request.json
-        user_message = data.get("message", "").strip()
+        data = request.json or {}
+        user_message = (data.get("message") or "").strip()
+        print("CHAT REQUEST:", data)
 
         if not user_message:
-            return jsonify({
-                "reply": "I'm here whenever you're ready 🌱"
-            })
+            return jsonify({"reply": "I'm here whenever you're ready 🌱"})
 
-        response = client.models.generate_content(
-            model="models/gemini-pro",
-            contents=f"{LEISURE_AI_PROMPT}\n\nUser: {user_message}\nAssistant:"
-        )
+        try:
+            response = client.models.generate_content(
+                model=GEMINI_MODEL,
+                contents=f"{LEISURE_AI_PROMPT}\n\nUser: {user_message}\nAssistant:"
+            )
+        except Exception as e:
+            print("SDK ERROR during generate_content:")
+            traceback.print_exc()
+            return jsonify({"reply": "I'm here with you, but something went wrong. Please try again 💙"}), 500
 
-        return jsonify({
-            "reply": response.text
-        })
+        print("RAW MODEL RESPONSE:", repr(response))
+
+        # Robust extraction
+        text = None
+        if isinstance(response, dict):
+            text = response.get("text") or (response.get("candidates") and response["candidates"][0].get("content"))
+        else:
+            text = getattr(response, "text", None)
+            if not text and getattr(response, "candidates", None):
+                cand = response.candidates[0]
+                text = getattr(cand, "content", None) or getattr(cand, "text", None)
+
+        if not text:
+            print("UNEXPECTED MODEL RESPONSE SHAPE:", response)
+            return jsonify({"reply": "Received unexpected response from model. Check server logs."}), 500
+
+        print("CHAT RESPONSE:", text)
+        return jsonify({"reply": text})
 
     except Exception as e:
         print("CHAT ERROR:", e)
-        return jsonify({
-            "reply": "I'm here with you, but something went wrong. Please try again 💙"
-        }), 500
+        traceback.print_exc()
+        return jsonify({"reply": "I'm here with you, but something went wrong. Please try again 💙"}), 500
+
 
 # =====================================================
 # HEALTH CHECK (OPTIONAL BUT GOOD)
 # =====================================================
+# Quick health endpoint for debugging
+@app.route("/health", methods=["GET"])
+def health():
+    return jsonify({
+        "ok": True,
+        "gemini_key_loaded": bool(GEMINI_API_KEY),
+        "gemini_api_version": GEMINI_API_VERSION
+    })
+
+
 @app.route("/", methods=["GET"])
 def home():
     return "NeuroNest backend is running."
