@@ -2,3 +2,6 @@
 __pycache__/
 *.pyc
 .env
+service-account.json
+config.local.js
+server.log

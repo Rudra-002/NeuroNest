@@ -331,3 +331,20 @@ body * {
   pointer-events: none;
 }
 
+.btn {
+  padding: 8px 16px;
+  text-decoration: none;
+  color: #555;
+  border-radius: 6px 6px 0 0;
+  font-weight: 500;
+  border: 3px solid #4a90e2;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn:hover{
+  background: #d6e6ff;
+  color: #0b3c5d;
+}
+
+
+
