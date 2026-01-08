@@ -160,7 +160,7 @@ def chat():
             print("UNEXPECTED MODEL RESPONSE SHAPE:", response)
             return jsonify({"reply": "Received unexpected response from model. Check server logs."}), 500
         response = client.models.generate_content(
-            model="models/gemini-2.5-flash",
+            model="models/gemini-2.5-pro",
             contents=f"{LEISURE_AI_PROMPT}\n\nUser: {user_message}\nAssistant:"
         )
 
