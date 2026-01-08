@@ -52,7 +52,7 @@ if (!rawData) {
   document.getElementById("disclaimer").innerText = data.disclaimer ?? "";
 
   // Understanding your responses
-  const observationContainer = document.getElementById("observations");
+  const observationContainer = document.getElementById("explanationContainer");
   observationContainer.innerHTML = "";
 
   if (data.observations && data.observations.length > 0) {
@@ -64,7 +64,7 @@ if (!rawData) {
   }
 
   // What you can do next ?
-  const nextStepsContainer = document.getElementById("nextSteps");
+  const nextStepsContainer = document.getElementById("nextStepsList");
   nextStepsContainer.innerHTML = "";
 
   if (data.nextSteps && data.nextSteps.length > 0) {

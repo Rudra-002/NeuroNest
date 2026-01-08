@@ -151,27 +151,20 @@ def chat():
 
         # Robust extraction
         text = None
-        if isinstance(response, dict):
-            text = response.get("text") or (response.get("candidates") and response["candidates"][0].get("content"))
-        else:
-            text = getattr(response, "text", None)
-            if not text and getattr(response, "candidates", None):
-                cand = response.candidates[0]
-                text = getattr(cand, "content", None) or getattr(cand, "text", None)
+        try:
+            text = response.candidates[0].content.parts[0].text
+        except Exception:
+            traceback.print_exc()
 
         if not text:
-            print("UNEXPECTED MODEL RESPONSE SHAPE:", response)
-            return jsonify({"reply": "Received unexpected response from model. Check server logs."}), 500
-        response = client.models.generate_content(
-            model="models/gemini-2.5-pro",
-            contents=f"{LEISURE_AI_PROMPT}\n\nUser: {user_message}\nAssistant:"
-        )
+            return jsonify({
+                "reply": "I'm here with you, but I couldn't generate a response this time. Please try again 💙"
+            }), 500
 
         print("CHAT RESPONSE:", text)
         return jsonify({"reply": text})
 
-    except Exception as e:
-        print("CHAT ERROR:", e)
+    except Exception:
         traceback.print_exc()
         return jsonify({"reply": "I'm here with you, but something went wrong. Please try again 💙"}), 500
 
