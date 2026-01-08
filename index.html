@@ -159,13 +159,18 @@ chatbotInput.addEventListener("keypress", (e) => {
 
   // compute backend base at request time so an optionally-loaded config.local.js is honored
   function getBackendBase() {
-    if (window.BACKEND_OVERRIDE) {
-      console.debug("Using BACKEND_OVERRIDE:", window.BACKEND_OVERRIDE);
-      return window.BACKEND_OVERRIDE;
-    }
-    // default to same-origin (serving frontend via http.server) or production URL
-    return "";
+  if (window.BACKEND_OVERRIDE) {
+    console.debug("Using BACKEND_OVERRIDE:", window.BACKEND_OVERRIDE);
+    return window.BACKEND_OVERRIDE;
   }
+
+  if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+    return "http://localhost:5000";
+  }
+
+  return "https://neuronest-backend-fa23.onrender.com";
+}
+
 
   async function sendMessage() {
     const message = chatbotInput.value.trim();
