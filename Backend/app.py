@@ -124,8 +124,11 @@ def list_models():
 # =====================================================
 # AI CHATBOT ROUTE
 # =====================================================
-@app.route("/chat", methods=["POST"])
+@app.route("/chat", methods=["POST", "OPTIONS"])
 def chat():
+    if request.method == "OPTIONS":
+        return "", 204
+
     try:
         data = request.json or {}
         user_message = (data.get("message") or "").strip()
