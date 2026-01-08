@@ -87,13 +87,42 @@ if (!result) {
     const nextStepsContainer = document.getElementById("nextStepsList");
     nextStepsContainer.innerHTML = "";
 
-    if (data.nextSteps && data.nextSteps.length > 0) {
-      data.nextSteps.forEach(step => {
-        const li = document.createElement("li");
-        li.innerText = step;
-        nextStepsContainer.appendChild(li);
-      });
-    }
+    if (data.observations && data.observations.length > 0) {
+  data.observations.forEach(obs => {
+    const li = document.createElement("li");
+    li.innerText = obs;
+    observationContainer.appendChild(li);
+  });
+} else {
+  let explanation = "";
+
+  if (data.score <= 10) {
+    explanation =
+      "Your responses suggest a low to moderate presence of autistic traits. This may reflect individual differences in communication, preferences, or sensory experiences.";
+  } else if (data.score <= 18) {
+    explanation =
+      "Your responses indicate several patterns commonly associated with autistic traits, particularly in areas such as social interaction or routine preferences.";
+  } else {
+    explanation =
+      "Your responses show multiple consistent patterns commonly associated with autism. A professional evaluation may help provide clarity and support.";
+  }
+
+  observationContainer.innerHTML = `<p style="color:#444;">${explanation}</p>`;
+}
+
+if (data.nextSteps && data.nextSteps.length > 0) {
+  data.nextSteps.forEach(step => {
+    const li = document.createElement("li");
+    li.innerText = step;
+    nextStepsContainer.appendChild(li);
+  });
+} else {
+  nextStepsContainer.innerHTML = `
+    <li>Continue observing day-to-day behaviors in comfortable settings.</li>
+    <li>Explore learning resources related to neurodiversity.</li>
+    <li>If you have concerns, consider consulting a qualified professional.</li>
+  `;
+}
 
     /* -----------------------------
       VISUAL EMPHASIS
