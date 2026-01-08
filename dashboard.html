@@ -34,95 +34,47 @@
 
 
 <script>
-  const result = JSON.parse(
-  localStorage.getItem("screeningResult")
-);
-
-if (!result) {
-  window.location.href = "screening.html";
-}
-
-  // Fetch stored screening result
   const rawData = localStorage.getItem("screeningResult");
 
-  // Basic safety check
-  if (!rawData) {
-    document.body.innerHTML = `
-      <div style="text-align:center; padding:40px;">
-        <h2>No screening data found</h2>
-        <p>Please complete the screening before viewing results.</p>
-      </div>
-    `;
-  } else {
-    const data = JSON.parse(rawData);
-
-    // Core summary
-    document.getElementById("risk").innerText = data.riskLevel ?? "—";
-    document.getElementById("score").innerText = data.score ?? "—";
-    document.getElementById("disclaimer").innerText = data.disclaimer ?? "";
-
-    /* -----------------------------
-       KEY OBSERVATIONS SECTION
-    ------------------------------ */
-    const observationContainer = document.getElementById("explanationContainer");
-    observationContainer.innerHTML = "";
-
-    if (data.observations && data.observations.length > 0) {
-      data.observations.forEach(obs => {
-        const li = document.createElement("li");
-        li.innerText = obs;
-        observationContainer.appendChild(li);
-      });
-    } else {
-      observationContainer.innerHTML = `
-        <p style="color:#666;">
-          This screening did not highlight specific patterns that required further explanation.
-        </p>
-      `;
-    }
-
-    /* -----------------------------
-       WHAT YOU CAN DO NEXT
-    ------------------------------ */
-    const nextStepsContainer = document.getElementById("nextStepsList");
-    nextStepsContainer.innerHTML = "";
-
-    if (data.observations && data.observations.length > 0) {
-  data.observations.forEach(obs => {
-    const li = document.createElement("li");
-    li.innerText = obs;
-    observationContainer.appendChild(li);
-  });
+if (!rawData) {
+  document.body.innerHTML = `
+    <div style="text-align:center; padding:40px;">
+      <h2>No screening data found</h2>
+      <p>Please complete the screening before viewing results.</p>
+    </div>
+  `;
 } else {
-  let explanation = "";
+  const data = JSON.parse(rawData);
 
-  if (data.score <= 10) {
-    explanation =
-      "Your responses suggest a low to moderate presence of autistic traits. This may reflect individual differences in communication, preferences, or sensory experiences.";
-  } else if (data.score <= 18) {
-    explanation =
-      "Your responses indicate several patterns commonly associated with autistic traits, particularly in areas such as social interaction or routine preferences.";
-  } else {
-    explanation =
-      "Your responses show multiple consistent patterns commonly associated with autism. A professional evaluation may help provide clarity and support.";
+  // Core summary
+  document.getElementById("risk").innerText = data.riskLevel ?? "-";
+  document.getElementById("score").innerText = data.score ?? "-";
+  document.getElementById("disclaimer").innerText = data.disclaimer ?? "";
+
+  // Understanding your responses
+  const observationContainer = document.getElementById("observations");
+  observationContainer.innerHTML = "";
+
+  if (data.observations && data.observations.length > 0) {
+    data.observations.forEach(obs => {
+      const li = document.createElement("li");
+      li.innerText = obs;
+      observationContainer.appendChild(li);
+    });
   }
 
-  observationContainer.innerHTML = `<p style="color:#444;">${explanation}</p>`;
-}
+  // What you can do next ?
+  const nextStepsContainer = document.getElementById("nextSteps");
+  nextStepsContainer.innerHTML = "";
 
-if (data.nextSteps && data.nextSteps.length > 0) {
-  data.nextSteps.forEach(step => {
-    const li = document.createElement("li");
-    li.innerText = step;
-    nextStepsContainer.appendChild(li);
-  });
-} else {
-  nextStepsContainer.innerHTML = `
-    <li>Continue observing day-to-day behaviors in comfortable settings.</li>
-    <li>Explore learning resources related to neurodiversity.</li>
-    <li>If you have concerns, consider consulting a qualified professional.</li>
-  `;
-}
+  if (data.nextSteps && data.nextSteps.length > 0) {
+    data.nextSteps.forEach(step => {
+      const li = document.createElement("li");
+      li.innerText = step;
+      nextStepsContainer.appendChild(li);
+    });
+  }
+
 
     /* -----------------------------
       VISUAL EMPHASIS
