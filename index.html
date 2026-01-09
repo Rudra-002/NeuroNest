@@ -172,47 +172,45 @@ chatbotInput.addEventListener("keypress", (e) => {
 }
 
 
-  async function sendMessage() {
-    const message = chatbotInput.value.trim();
-    if (!message) return;
+  // Slightly more interactive version - shows you have the foundation
 
-    addMessage(message, "user-message");
-    chatbotInput.value = "";
+async function sendMessage() {
+  const message = chatbotInput.value.trim();
+  if (!message) return;
 
-    const loadingDiv = document.createElement("div");
-    loadingDiv.className = "bot-message";
-    loadingDiv.innerText = "Thinking gently… 🌱";
-    chatbotMessages.appendChild(loadingDiv);
+  addMessage(message, "user-message");
+  chatbotInput.value = "";
+
+  const loadingDiv = document.createElement("div");
+  loadingDiv.className = "bot-message";
+  loadingDiv.innerText = "Thinking gently… 🌱";
+  chatbotMessages.appendChild(loadingDiv);
+  chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+  setTimeout(() => {
+    const response = getResponse(message.toLowerCase());
+    loadingDiv.innerText = response;
     chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+  }, 800);
+}
 
-    try {
-      const base = getBackendBase();
-      console.log("Sending to backend:", `${base}/chat`, message);
-
-      const response = await fetch(`${base}/chat`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message })
-      });
-
-      if (!response.ok) {
-        const errText = await response.text().catch(() => "");
-        console.error("Backend error:", response.status, errText);
-        loadingDiv.innerText = errText || "I'm here with you, but something went wrong. Please try again 💙";
-        return;
-      }
-
-      const data = await response.json();
-      console.log("Received from backend:", data);
-      loadingDiv.innerText = data.reply ?? "No reply from server.";
-
-    } catch (err) {
-      console.error("Chat error:", err);
-      loadingDiv.innerText = "I'm here with you, but something went wrong. Please try again 💙";
-    }
-
-    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+function getResponse(message) {
+  // Show basic awareness capability
+  if (message.includes("hello") || message.includes("hi") || message.includes("hey")) {
+    return "Hello! 👋\n\nThank you for visiting NeuroNest. Our AI assistant is currently being fine-tuned for optimal support.\n\nIn the meantime, feel free to explore our Autism Awareness resources or try our Screening tool. We're here to help! 💙";
   }
+  
+  if (message.includes("screening") || message.includes("test")) {
+    return "Our developmental screening tool is fully operational! 🌱\n\nYou can access it from the 'Screening' tab in the navigation menu. It provides gentle, observational insights about developmental patterns.\n\nThe AI chatbot for conversational support is still under development.";
+  }
+  
+  if (message.includes("autism") || message.includes("asd")) {
+    return "You can learn all about autism in our 'Autism Awareness' section! 💙\n\nOur comprehensive AI chatbot is currently under development, but our educational resources are fully available.\n\nWould you like to explore our awareness materials?";
+  }
+  
+  // Default response
+  return "Thank you for your interest! 💙\n\nOur AI conversational assistant is currently under development and will be fully operational soon.\n\nIn the meantime:\n• Explore our Autism Awareness section\n• Try our Screening tool\n• Read about Our Journey\n\nFor immediate support, please consult with a healthcare professional.";
+}
 
 function addMessage(text, className) {
   const div = document.createElement("div");
