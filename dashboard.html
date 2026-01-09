@@ -22,7 +22,7 @@
 
 <div class="card wide">
   <h3>Understanding Your Responses</h3>
-  <div id="explanationContainer"></div>
+  <ul id="explanationContainer"></ul>
 </div>
 
 <div class="card wide">
@@ -30,54 +30,56 @@
   <ul id="nextStepsList"></ul>
 </div>
 
-
-
-
 <script>
   const rawData = localStorage.getItem("screeningResult");
 
-if (!rawData) {
-  document.body.innerHTML = `
-    <div style="text-align:center; padding:40px;">
-      <h2>No screening data found</h2>
-      <p>Please complete the screening before viewing results.</p>
-    </div>
-  `;
-} else {
-  const data = JSON.parse(rawData);
+  if (!rawData) {
+    document.body.innerHTML = `
+      <div style="text-align:center; padding:40px;">
+        <h2>No screening data found</h2>
+        <p>Please complete the screening before viewing results.</p>
+      </div>
+    `;
+  } else {
+    const data = JSON.parse(rawData);
 
-  // Core summary
-  document.getElementById("risk").innerText = data.riskLevel ?? "-";
-  document.getElementById("score").innerText = data.score ?? "-";
-  document.getElementById("disclaimer").innerText = data.disclaimer ?? "";
+    // Core summary
+    document.getElementById("risk").innerText = data.riskLevel ?? "-";
+    document.getElementById("score").innerText = data.score ?? "-";
+    document.getElementById("disclaimer").innerText = data.disclaimer ?? "";
 
-  // Understanding your responses
-  const observationContainer = document.getElementById("explanationContainer");
-  observationContainer.innerHTML = "";
+    // Understanding your responses
+    const observationContainer = document.getElementById("explanationContainer");
+    observationContainer.innerHTML = "";
 
-  if (data.observations && data.observations.length > 0) {
-    data.observations.forEach(obs => {
-      const li = document.createElement("li");
-      li.innerText = obs;
-      observationContainer.appendChild(li);
-    });
-  }
+    if (data.observations && data.observations.length > 0) {
+      data.observations.forEach(obs => {
+        const li = document.createElement("li");
+        li.innerText = obs;
+        observationContainer.appendChild(li);
+      });
+    } else {
+      // If no observations, show a message
+      observationContainer.innerHTML = "<li>No specific patterns observed in this screening.</li>";
+    }
 
-  // What you can do next ?
-  const nextStepsContainer = document.getElementById("nextStepsList");
-  nextStepsContainer.innerHTML = "";
+    // What you can do next
+    const nextStepsContainer = document.getElementById("nextStepsList");
+    nextStepsContainer.innerHTML = "";
 
-  if (data.nextSteps && data.nextSteps.length > 0) {
-    data.nextSteps.forEach(step => {
-      const li = document.createElement("li");
-      li.innerText = step;
-      nextStepsContainer.appendChild(li);
-    });
-  }
-
+    if (data.nextSteps && data.nextSteps.length > 0) {
+      data.nextSteps.forEach(step => {
+        const li = document.createElement("li");
+        li.innerText = step;
+        nextStepsContainer.appendChild(li);
+      });
+    } else {
+      // Fallback if no next steps
+      nextStepsContainer.innerHTML = "<li>Continue monitoring development and consult a professional if needed.</li>";
+    }
 
     /* -----------------------------
-      VISUAL EMPHASIS
+       VISUAL EMPHASIS
        (Soft, non-alarming)
     ------------------------------ */
     const riskCard = document.getElementById("riskCard");
@@ -86,9 +88,6 @@ if (!rawData) {
     }
   }
 </script>
-
-
-
 
 </body>
 </html>

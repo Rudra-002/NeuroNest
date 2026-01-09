@@ -5,6 +5,9 @@ from google import genai
 from dotenv import load_dotenv
 import traceback
 
+# IMPORTANT: Import your ai_logic
+from ai_logic import analyze_screening
+
 load_dotenv()
 
 # -------------------------------
@@ -17,8 +20,7 @@ CORS(app)
 # Gemini Client
 # -------------------------------
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-GEMINI_API_VERSION = os.getenv("GEMINI_API_VERSION", "vbeta")
-# Fixed: Use correct model name
+GEMINI_API_VERSION = os.getenv("GEMINI_API_VERSION", "v1beta")
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")
 
 print("=" * 50)
@@ -28,7 +30,7 @@ print("API_KEY loaded:", bool(GEMINI_API_KEY))
 print("=" * 50)
 
 if not GEMINI_API_KEY:
-    print("WARNING: GEMINI_API_KEY is not set. AI requests will fail.")
+    print("WARNING: GEMINI_API_KEY is not set.")
 
 client = genai.Client(
     api_key=GEMINI_API_KEY,
@@ -53,7 +55,7 @@ Tone: Warm, calm, non-judgmental, hopeful.
 Remember: You're here to support, not diagnose."""
 
 # =====================================================
-# SCREENING ANALYSIS ROUTE
+# SCREENING ANALYSIS ROUTE - FIXED!
 # =====================================================
 @app.route("/analyze", methods=["POST"])
 def analyze():
@@ -63,33 +65,19 @@ def analyze():
         return jsonify({
             "score": 0,
             "riskLevel": "Unavailable",
-            "summary": "No screening data received.",
-            "recommendations": []
+            "observations": [],
+            "nextSteps": [],
+            "disclaimer": "No screening data received."
         }), 400
 
     try:
-        score = sum(data.values())
-
-        if score <= 6:
-            risk = "Low"
-            summary = "Your responses suggest low observable risk. Continue monitoring and supporting healthy development."
-        elif score <= 12:
-            risk = "Moderate"
-            summary = "Some responses may indicate developmental differences. Consider observing patterns and seeking guidance."
-        else:
-            risk = "High"
-            summary = "Several responses suggest potential developmental concerns. A professional consultation is recommended."
-
-        return jsonify({
-            "score": score,
-            "riskLevel": risk,
-            "summary": summary,
-            "recommendations": [
-                "Observe behavioral patterns over time",
-                "Engage in supportive communication",
-                "Consult a qualified professional if concerns persist"
-            ]
-        })
+        print("Received screening data:", data)
+        
+        # USE THE PROPER ai_logic.py FUNCTION!
+        result = analyze_screening(data)
+        
+        print("Analysis result:", result)
+        return jsonify(result)
 
     except Exception as e:
         print("ANALYZE ERROR:", e)
@@ -97,9 +85,11 @@ def analyze():
         return jsonify({
             "score": 0,
             "riskLevel": "Error",
-            "summary": "Something went wrong while analyzing the screening.",
-            "recommendations": []
+            "observations": [],
+            "nextSteps": ["Please try again or contact support."],
+            "disclaimer": "Something went wrong while analyzing the screening."
         }), 500
+
 
 # =====================================================
 # LIST MODELS (DEBUG)
@@ -120,8 +110,9 @@ def list_models():
         traceback.print_exc()
         return jsonify({"error": str(e)}), 500
 
+
 # =====================================================
-# AI CHATBOT ROUTE (FIXED)
+# AI CHATBOT ROUTE
 # =====================================================
 @app.route("/chat", methods=["POST", "OPTIONS"])
 def chat():
@@ -140,9 +131,7 @@ def chat():
         if not user_message:
             return jsonify({"reply": "I'm here whenever you're ready 🌱"})
 
-        # FIXED: Proper message formatting for Gemini
         try:
-            # Build the full prompt
             full_prompt = f"{LEISURE_AI_PROMPT}\n\nUser: {user_message}\n\nAssistant:"
             
             print("Sending to Gemini with model:", GEMINI_MODEL)
@@ -162,11 +151,10 @@ def chat():
                 "error": str(e)
             }), 500
 
-        # FIXED: Better response extraction with debugging
+        # Better response extraction with debugging
         text = None
         
         try:
-            # Method 1: Try standard extraction
             if hasattr(response, 'candidates') and response.candidates:
                 candidate = response.candidates[0]
                 if hasattr(candidate, 'content') and hasattr(candidate.content, 'parts'):
@@ -174,12 +162,10 @@ def chat():
                         text = candidate.content.parts[0].text
                         print("✓ Extracted via candidates[0].content.parts[0].text")
             
-            # Method 2: Try direct text attribute
             if not text and hasattr(response, 'text'):
                 text = response.text
                 print("✓ Extracted via response.text")
             
-            # Method 3: Check if response has a result attribute
             if not text and hasattr(response, 'result'):
                 text = str(response.result)
                 print("✓ Extracted via response.result")
@@ -190,8 +176,6 @@ def chat():
 
         if not text:
             print("❌ Could not extract text from response")
-            print("Response type:", type(response))
-            print("Response dir:", dir(response))
             return jsonify({
                 "reply": "I'm here with you, but I couldn't generate a proper response. Please try again 💙"
             }), 500
@@ -209,6 +193,7 @@ def chat():
             "reply": "I'm here with you, but something went wrong. Please try again 💙",
             "error": str(outer_error)
         }), 500
+
 
 # =====================================================
 # HEALTH CHECK
