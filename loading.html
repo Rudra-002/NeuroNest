@@ -71,5 +71,74 @@
     });
   </script>
 
+  
+<script>
+  // NEURONEST - ANIMATION JAVASCRIPT
+// Create background particles
+const createParticles = () => {
+  // Check if particles container already exists
+  if (document.querySelector('.bg-particles')) return;
+  
+  const particlesContainer = document.createElement('div');
+  particlesContainer.className = 'bg-particles';
+  document.body.insertBefore(particlesContainer, document.body.firstChild);
+  
+  for (let i = 0; i < 20; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.width = Math.random() * 100 + 50 + 'px';
+    particle.style.height = particle.style.width;
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.top = Math.random() * 100 + '%';
+    particle.style.animationDelay = Math.random() * 20 + 's';
+    particlesContainer.appendChild(particle);
+  }
+};
+
+// Add reveal class to sections for scroll animation
+const addRevealClasses = () => {
+  const sections = document.querySelectorAll('section, .hero, .card');
+  sections.forEach((section) => {
+    if (!section.classList.contains('reveal')) {
+      section.classList.add('reveal');
+    }
+  });
+};
+
+// Reveal elements on scroll
+const revealOnScroll = () => {
+  const revealElements = document.querySelectorAll('.reveal');
+  
+  revealElements.forEach((el) => {
+    const rect = el.getBoundingClientRect();
+    const isVisible = rect.top < window.innerHeight * 0.85;
+    
+    if (isVisible) {
+      el.classList.add('active');
+    }
+  });
+};
+
+// Initialize animations
+const initAnimations = () => {
+  createParticles();
+  addRevealClasses();
+  revealOnScroll(); // Initial check
+  
+  // Add scroll listener
+  window.addEventListener('scroll', revealOnScroll);
+  
+  // Trigger reveal for elements already in view
+  setTimeout(revealOnScroll, 100);
+};
+
+// Run when page loads
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initAnimations);
+} else {
+  initAnimations();
+}
+</script>
+
 </body>
 </html>

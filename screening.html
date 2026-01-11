@@ -7,23 +7,26 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="page-soft-bg">
 
   <!-- NAVBAR -->
   <nav class="navbar ribbon">
-  <div class="logo">NeuroNest</div>
-
-  <div class="tabs">
-    <a href="index.html" class="tab">Home</a>
-    <a href="autism.html" class="tab">Autism Awareness</a>
-    <a href="screening.html" class="tab active">Screening</a>
-    <a href="journey.html" class="tab">Our Journey</a>
-  </div>
-</nav>
-
+    <div class="logo-with-image">
+      <img src="neuronest-logo.png" alt="NeuroNest Logo" class="logo-img">
+      <div class="logo-text-new">
+        <span class="neuro-new">Neuro</span><span class="nest-new">Nest</span>
+      </div>
+    </div>
+    <div class="tabs">
+      <a href="index.html" class="tab">Home</a>
+      <a href="autism.html" class="tab">Autism Awareness</a>
+      <a href="screening.html" class="tab active">Screening</a>
+      <a href="journey.html" class="tab">Our Journey</a>
+    </div>
+  </nav>
 
   <!-- PAGE HEADER -->
-  <section>
+  <section class="reveal">
     <h1 style="text-align:center;">Developmental Screening</h1>
     <p class="screening-note">
       Please answer the following questions honestly.  
@@ -35,62 +38,168 @@
   <p id="progressText" class="progress-text">Question 1 of 6</p>
 
   <!-- SCREENING FORM -->
-  <form id="screeningForm" class="screening-form">
+  <div class="reveal">
+    <form id="screeningForm" class="screening-form">
 
-    <div class="question" data-step="1">
-      <label>🧠 Does the child respond to their name?</label>
-      <select id="q1">
-        <option value="0">Yes</option>
-        <option value="2">No</option>
-      </select>
+      <div class="question" data-step="1">
+        <label>🧠 Does the child respond to their name?</label>
+        <select id="q1">
+          <option value="0">Yes</option>
+          <option value="2">No</option>
+        </select>
+      </div>
+
+      <div class="question" data-step="2">
+        <label>👀 Does the child maintain eye contact?</label>
+        <select id="q2">
+          <option value="0">Yes</option>
+          <option value="2">No</option>
+        </select>
+      </div>
+
+      <div class="question" data-step="3">
+        <label>👉 Does the child use gestures like pointing or waving?</label>
+        <select id="q3">
+          <option value="0">Yes</option>
+          <option value="2">No</option>
+        </select>
+      </div>
+
+      <div class="question" data-step="4">
+        <label>🔁 Does the child show repetitive behaviors?</label>
+        <select id="q4">
+          <option value="0">No</option>
+          <option value="2">Yes</option>
+        </select>
+      </div>
+
+      <div class="question" data-step="5">
+        <label>🔊 Does the child react strongly to sounds or textures?</label>
+        <select id="q5">
+          <option value="0">No</option>
+          <option value="2">Yes</option>
+        </select>
+      </div>
+
+      <div class="question" data-step="6">
+        <label>🎭 Does the child engage in pretend or imaginative play?</label>
+        <select id="q6">
+          <option value="0">Yes</option>
+          <option value="2">No</option>
+        </select>
+      </div>
+
+      <button type="submit">Analyze Responses</button>
+
+    </form>
+  </div>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer reveal">
+    <p>
+      <strong>Important:</strong> This screening tool provides observational insights only. 
+      It is not a substitute for professional medical advice, diagnosis, or treatment. 
+      Please consult with a qualified healthcare provider for proper evaluation.
+    </p>
+  </div>
+
+  <!-- AI CHATBOT -->
+  <div id="ai-float-button">
+    <img src="Fevicon.png" alt="AI Assistant" onerror="this.innerHTML='🤖'">
+  </div>
+
+  <div id="chatbot-container">
+    <div id="chatbot-header">
+      NeuroNest AI
+      <span id="chatbot-close">✕</span>
     </div>
-
-    <div class="question" data-step="2">
-      <label>👀 Does the child maintain eye contact?</label>
-      <select id="q2">
-        <option value="0">Yes</option>
-        <option value="2">No</option>
-      </select>
+    <div id="chatbot-messages">
+      <div class="bot-message">
+        Hi 👋<br>
+        I'm here to support you.<br><br>
+        You can ask me anything — or choose one below:
+        <br><br>
+        • Learn about autism<br>
+        • Explore NeuroNest<br>
+        • Get guidance for families<br>
+        • Just talk
+      </div>
     </div>
-
-    <div class="question" data-step="3">
-      <label>👉 Does the child use gestures like pointing or waving?</label>
-      <select id="q3">
-        <option value="0">Yes</option>
-        <option value="2">No</option>
-      </select>
+    <div id="chatbot-input-area">
+      <input type="text" id="chatbot-input" placeholder="Type here… take your time">
+      <button id="chatbot-send">Send</button>
     </div>
+  </div>
 
-    <div class="question" data-step="4">
-      <label>🔁 Does the child show repetitive behaviors?</label>
-      <select id="q4">
-        <option value="0">No</option>
-        <option value="2">Yes</option>
-      </select>
-    </div>
+  <!-- CHATBOT SCRIPT -->
+  <script>
+    const aiFloatButton = document.getElementById("ai-float-button");
+    const chatbotContainer = document.getElementById("chatbot-container");
+    const chatbotClose = document.getElementById("chatbot-close");
+    const chatbotSend = document.getElementById("chatbot-send");
+    const chatbotInput = document.getElementById("chatbot-input");
+    const chatbotMessages = document.getElementById("chatbot-messages");
 
-    <div class="question" data-step="5">
-      <label>🔊 Does the child react strongly to sounds or textures?</label>
-      <select id="q5">
-        <option value="0">No</option>
-        <option value="2">Yes</option>
-      </select>
-    </div>
+    aiFloatButton.onclick = () => {
+      chatbotContainer.style.display = "flex";
+    };
 
-    <div class="question" data-step="6">
-      <label>🎭 Does the child engage in pretend or imaginative play?</label>
-      <select id="q6">
-        <option value="0">Yes</option>
-        <option value="2">No</option>
-      </select>
-    </div>
+    chatbotClose.onclick = () => {
+      chatbotContainer.style.display = "none";
+    };
 
-    <button type="submit">Analyze</button>
+    chatbotSend.onclick = sendMessage;
 
+    chatbotInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") sendMessage();
+    });
 
-  </form>
+    function sendMessage() {
+      const message = chatbotInput.value.trim();
+      if (!message) return;
 
-  <!-- SCRIPT -->
+      addMessage(message, "user-message");
+      chatbotInput.value = "";
+
+      const loadingDiv = document.createElement("div");
+      loadingDiv.className = "bot-message";
+      loadingDiv.innerText = "Thinking gently… 🌱";
+      chatbotMessages.appendChild(loadingDiv);
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+      setTimeout(() => {
+        const response = getResponse(message.toLowerCase());
+        loadingDiv.innerText = response;
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+      }, 800);
+    }
+
+    function getResponse(message) {
+      if (message.includes("hello") || message.includes("hi") || message.includes("hey")) {
+        return "Hello! 👋\n\nThank you for visiting NeuroNest. Our AI assistant is currently being fine-tuned for optimal support.\n\nIn the meantime, feel free to explore our Autism Awareness resources or try our Screening tool. We're here to help! 💙";
+      }
+      
+      if (message.includes("screening") || message.includes("test")) {
+        return "Our developmental screening tool is fully operational! 🌱\n\nYou can access it from the 'Screening' tab in the navigation menu. It provides gentle, observational insights about developmental patterns.\n\nThe AI chatbot for conversational support is still under development.";
+      }
+      
+      if (message.includes("autism") || message.includes("asd")) {
+        return "You can learn all about autism in our 'Autism Awareness' section! 💙\n\nOur comprehensive AI chatbot is currently under development, but our educational resources are fully available.\n\nWould you like to explore our awareness materials?";
+      }
+      
+      return "Thank you for your interest! 💙\n\nOur AI conversational assistant is currently under development and will be fully operational soon.\n\nIn the meantime:\n• Explore our Autism Awareness section\n• Try our Screening tool\n• Read about Our Journey\n\nFor immediate support, please consult with a healthcare professional.";
+    }
+
+    function addMessage(text, className) {
+      const div = document.createElement("div");
+      div.className = className;
+      div.innerHTML = text;
+      chatbotMessages.appendChild(div);
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+  </script>
+
+  <!-- YOUR EXISTING SCRIPT.JS -->
   <script src="script.js"></script>
 
   <!-- PROGRESS LOGIC -->
@@ -99,15 +208,50 @@
     const progressText = document.getElementById("progressText");
     const total = questions.length;
 
-  questions.forEach((question, index) => {
-    const select = question.querySelector("select");
+    questions.forEach((question, index) => {
+      const select = question.querySelector("select");
 
-    // Update when user focuses or clicks into a question
-    select.addEventListener("focus", () => {
-      progressText.innerText = `Question ${index + 1} of ${total}`;
+      select.addEventListener("focus", () => {
+        progressText.innerText = `Question ${index + 1} of ${total}`;
+      });
     });
-  });
-</script>
+  </script>
+
+  <!-- ANIMATION SCRIPT -->
+  <script>
+    const createParticles = () => {
+      if (document.querySelector('.bg-particles')) return;
+      
+      const particlesContainer = document.createElement('div');
+      particlesContainer.className = 'bg-particles';
+      document.body.insertBefore(particlesContainer, document.body.firstChild);
+      
+      for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.width = Math.random() * 100 + 50 + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 20 + 's';
+        particlesContainer.appendChild(particle);
+      }
+    };
+
+    const revealOnScroll = () => {
+      const revealElements = document.querySelectorAll('.reveal');
+      revealElements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.85) {
+          el.classList.add('active');
+        }
+      });
+    };
+
+    createParticles();
+    revealOnScroll();
+    window.addEventListener('scroll', revealOnScroll);
+  </script>
 
 </body>
 </html>

@@ -11,19 +11,22 @@
 
   <!-- NAVBAR -->
   <nav class="navbar ribbon">
-  <div class="logo">NeuroNest</div>
-
-  <div class="tabs">
-    <a href="index.html" class="tab">Home</a>
-    <a href="autism.html" class="tab active">Autism Awareness</a>
-    <a href="screening.html" class="tab">Screening</a>
-    <a href="journey.html" class="tab">Our Journey</a>
-  </div>
-</nav>
-
+    <div class="logo-with-image">
+      <img src="neuronest-logo.png" alt="NeuroNest Logo" class="logo-img">
+      <div class="logo-text-new">
+        <span class="neuro-new">Neuro</span><span class="nest-new">Nest</span>
+      </div>
+    </div>
+    <div class="tabs">
+      <a href="index.html" class="tab">Home</a>
+      <a href="autism.html" class="tab active">Autism Awareness</a>
+      <a href="screening.html" class="tab">Screening</a>
+      <a href="journey.html" class="tab">Our Journey</a>
+    </div>
+  </nav>
 
   <!-- PAGE INTRO -->
-  <section>
+  <section class="reveal">
     <h1>Autism Awareness & Understanding</h1>
     <p>
       Autism Spectrum Disorder (ASD) is a neurodevelopmental condition that affects
@@ -33,10 +36,10 @@
   </section>
 
   <!-- WHAT IS AUTISM -->
-  <section>
+  <section class="reveal">
     <h2>What Is Autism?</h2>
     <p>
-      Autism is called a “spectrum” because it affects people in different ways
+      Autism is called a "spectrum" because it affects people in different ways
       and to different degrees. Some individuals may require significant support,
       while others may live independently with minimal assistance.
     </p>
@@ -47,7 +50,7 @@
   </section>
 
   <!-- EFFECT ON CHILDREN -->
-  <section>
+  <section class="reveal">
     <h2>How Autism Affects Children</h2>
     <p>
       Children with autism may experience differences in:
@@ -64,7 +67,7 @@
   </section>
 
   <!-- EFFECT ON FAMILIES -->
-  <section>
+  <section class="reveal">
     <h2>Impact on Families & Caregivers</h2>
     <p>
       Families and caregivers often face emotional, social, and financial challenges.
@@ -78,56 +81,200 @@
   </section>
 
   <!-- MYTHS -->
-  <section>
+  <section class="reveal">
     <h2>Common Myths & Misconceptions</h2>
-    <ul>
-      <li>❌ Autism is caused by poor parenting</li>
-      <li>❌ All autistic individuals have the same abilities</li>
-      <li>❌ Autism cannot improve with support</li>
-      <li>❌ Autism means lack of intelligence</li>
-    </ul>
-    <p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3 style="color: #0b3c5d; margin-bottom: 15px;">❌ Myth: Poor Parenting</h3>
+        <p style="margin: 0; color: #4a6b7c;">Autism is NOT caused by parenting styles. It's a neurodevelopmental condition present from birth.</p>
+      </div>
+      <div class="feature-card">
+        <h3 style="color: #0b3c5d; margin-bottom: 15px;">❌ Myth: Same Abilities</h3>
+        <p style="margin: 0; color: #4a6b7c;">Every autistic individual is unique with their own strengths, challenges, and abilities.</p>
+      </div>
+      <div class="feature-card">
+        <h3 style="color: #0b3c5d; margin-bottom: 15px;">❌ Myth: No Improvement</h3>
+        <p style="margin: 0; color: #4a6b7c;">With proper support, many individuals show significant progress and development.</p>
+      </div>
+      <div class="feature-card">
+        <h3 style="color: #0b3c5d; margin-bottom: 15px;">❌ Myth: Lack of Intelligence</h3>
+        <p style="margin: 0; color: #4a6b7c;">Autism is not related to intelligence. Many autistic individuals have average or above-average IQ.</p>
+      </div>
+    </div>
+    <p style="text-align: center; margin-top: 30px; font-weight: 600; color: #0b3c5d;">
       These myths contribute to stigma and delay meaningful support.
     </p>
   </section>
 
   <!-- WHY EARLY AWARENESS -->
-  <section>
-  <h2>Why Early Awareness Matters</h2>
+  <section class="reveal">
+    <h2>Why Early Awareness Matters</h2>
+    
+    <h3 style="margin-top:15px; color:#0b3c5d;">
+      Understanding early signs helps families act with clarity, not fear
+    </h3>
 
-  <h3 style="margin-top:15px; color:#0b3c5d;">
-    Understanding early signs helps families act with clarity, not fear
-  </h3>
+    <p>
+      Early awareness does not mean rushing to conclusions or labels.
+      It simply means being informed and observant during a child's
+      developmental years.
+    </p>
 
-  <p>
-    Early awareness does not mean rushing to conclusions or labels.
-    It simply means being informed and observant during a child’s
-    developmental years.
-  </p>
+    <p>
+      When early signs are overlooked or misunderstood, families may
+      experience delayed access to guidance, resources, and supportive
+      interventions that could otherwise make everyday life easier.
+    </p>
 
-  <p>
-    When early signs are overlooked or misunderstood, families may
-    experience delayed access to guidance, resources, and supportive
-    interventions that could otherwise make everyday life easier.
-  </p>
-
-  <p>
-    Recognizing patterns early allows caregivers to seek the right
-    information, ask better questions, and make thoughtful decisions
-    — without panic or pressure.
-  </p>
-</section>
-
+    <p>
+      Recognizing patterns early allows caregivers to seek the right
+      information, ask better questions, and make thoughtful decisions
+      — without panic or pressure.
+    </p>
+  </section>
 
   <!-- CTA -->
-  <section class="cta-section">
+  <section class="cta-section reveal">
     <h2>You Are Not Alone</h2>
     <p>
       NeuroNest exists to support awareness, reduce stigma,
       and guide families responsibly.
     </p>
-    <a class="btn" href="screening.html">Join NeuroNest / Get Support</a>
+    <a class="btn" href="screening.html">Start Screening / Get Support</a>
   </section>
+
+  <!-- AI CHATBOT (Copy from index.html) -->
+  <div id="ai-float-button">
+    <img src="Fevicon.png" alt="AI Assistant" onerror="this.innerHTML='🤖'">
+  </div>
+
+  <div id="chatbot-container">
+    <div id="chatbot-header">
+      NeuroNest AI
+      <span id="chatbot-close">✕</span>
+    </div>
+    <div id="chatbot-messages">
+      <div class="bot-message">
+        Hi 👋<br>
+        I'm here to support you.<br><br>
+        You can ask me anything — or choose one below:
+        <br><br>
+        • Learn about autism<br>
+        • Explore NeuroNest<br>
+        • Get guidance for families<br>
+        • Just talk
+      </div>
+    </div>
+    <div id="chatbot-input-area">
+      <input type="text" id="chatbot-input" placeholder="Type here… take your time">
+      <button id="chatbot-send">Send</button>
+    </div>
+  </div>
+
+  <!-- CHATBOT SCRIPT (Copy from index.html) -->
+  <script>
+    const aiFloatButton = document.getElementById("ai-float-button");
+    const chatbotContainer = document.getElementById("chatbot-container");
+    const chatbotClose = document.getElementById("chatbot-close");
+    const chatbotSend = document.getElementById("chatbot-send");
+    const chatbotInput = document.getElementById("chatbot-input");
+    const chatbotMessages = document.getElementById("chatbot-messages");
+
+    aiFloatButton.onclick = () => {
+      chatbotContainer.style.display = "flex";
+    };
+
+    chatbotClose.onclick = () => {
+      chatbotContainer.style.display = "none";
+    };
+
+    chatbotSend.onclick = sendMessage;
+
+    chatbotInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") sendMessage();
+    });
+
+    function sendMessage() {
+      const message = chatbotInput.value.trim();
+      if (!message) return;
+
+      addMessage(message, "user-message");
+      chatbotInput.value = "";
+
+      const loadingDiv = document.createElement("div");
+      loadingDiv.className = "bot-message";
+      loadingDiv.innerText = "Thinking gently… 🌱";
+      chatbotMessages.appendChild(loadingDiv);
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+      setTimeout(() => {
+        const response = getResponse(message.toLowerCase());
+        loadingDiv.innerText = response;
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+      }, 800);
+    }
+
+    function getResponse(message) {
+      if (message.includes("hello") || message.includes("hi") || message.includes("hey")) {
+        return "Hello! 👋\n\nThank you for visiting NeuroNest. Our AI assistant is currently being fine-tuned for optimal support.\n\nIn the meantime, feel free to explore our Autism Awareness resources or try our Screening tool. We're here to help! 💙";
+      }
+      
+      if (message.includes("screening") || message.includes("test")) {
+        return "Our developmental screening tool is fully operational! 🌱\n\nYou can access it from the 'Screening' tab in the navigation menu. It provides gentle, observational insights about developmental patterns.\n\nThe AI chatbot for conversational support is still under development.";
+      }
+      
+      if (message.includes("autism") || message.includes("asd")) {
+        return "You can learn all about autism in our 'Autism Awareness' section! 💙\n\nOur comprehensive AI chatbot is currently under development, but our educational resources are fully available.\n\nWould you like to explore our awareness materials?";
+      }
+      
+      return "Thank you for your interest! 💙\n\nOur AI conversational assistant is currently under development and will be fully operational soon.\n\nIn the meantime:\n• Explore our Autism Awareness section\n• Try our Screening tool\n• Read about Our Journey\n\nFor immediate support, please consult with a healthcare professional.";
+    }
+
+    function addMessage(text, className) {
+      const div = document.createElement("div");
+      div.className = className;
+      div.innerHTML = text;
+      chatbotMessages.appendChild(div);
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+  </script>
+
+  <!-- ANIMATION SCRIPT -->
+  <script>
+    // Create background particles
+    const createParticles = () => {
+      if (document.querySelector('.bg-particles')) return;
+      
+      const particlesContainer = document.createElement('div');
+      particlesContainer.className = 'bg-particles';
+      document.body.insertBefore(particlesContainer, document.body.firstChild);
+      
+      for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.width = Math.random() * 100 + 50 + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 20 + 's';
+        particlesContainer.appendChild(particle);
+      }
+    };
+
+    const revealOnScroll = () => {
+      const revealElements = document.querySelectorAll('.reveal');
+      revealElements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.85) {
+          el.classList.add('active');
+        }
+      });
+    };
+
+    createParticles();
+    revealOnScroll();
+    window.addEventListener('scroll', revealOnScroll);
+  </script>
 
 </body>
 </html>

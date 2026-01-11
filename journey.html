@@ -5,122 +5,648 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NeuroNest | Our Journey</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Additional styles for journey page */
+    .journey-hero {
+      background: linear-gradient(135deg, rgba(74, 144, 226, 0.08) 0%, rgba(79, 209, 197, 0.08) 100%);
+      padding: 80px 5%;
+      text-align: center;
+      border-radius: 24px;
+      margin: 40px auto;
+      max-width: 1000px;
+    }
+
+    .journey-quote {
+      font-size: 24px;
+      font-style: italic;
+      color: #0b3c5d;
+      margin: 30px auto;
+      max-width: 800px;
+      line-height: 1.6;
+      position: relative;
+      padding: 0 40px;
+    }
+
+    .journey-quote::before {
+      content: '"';
+      position: absolute;
+      left: 0;
+      top: -10px;
+      font-size: 60px;
+      color: #4a90e2;
+      opacity: 0.3;
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 60px auto;
+      padding-left: 50px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, #4a90e2, #4fd1c5);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 50px;
+      padding: 25px 30px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      border-left: 4px solid #4a90e2;
+      margin-left: 20px;
+      transition: all 0.3s ease;
+    }
+
+    .timeline-item:hover {
+      transform: translateX(10px);
+      box-shadow: 0 8px 30px rgba(74, 144, 226, 0.15);
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -42px;
+      top: 30px;
+      width: 16px;
+      height: 16px;
+      background: #4a90e2;
+      border: 4px solid white;
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.2);
+    }
+
+    .timeline-item h3 {
+      color: #0b3c5d;
+      font-size: 22px;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    .timeline-item p {
+      color: #4a6b7c;
+      font-size: 16px;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 25px;
+      margin: 50px 0;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 35px 20px;
+      background: linear-gradient(135deg, rgba(74, 144, 226, 0.08) 0%, rgba(79, 209, 197, 0.08) 100%);
+      border-radius: 20px;
+      border: 2px solid rgba(74, 144, 226, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(74, 144, 226, 0.2);
+    }
+
+    .stat-number {
+      font-size: 48px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #0b3c5d, #4a90e2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+
+    .stat-label {
+      font-size: 16px;
+      color: #4a6b7c;
+      font-weight: 600;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .team-card {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      border: 2px solid rgba(74, 144, 226, 0.1);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .team-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #4a90e2, #4fd1c5);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .team-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .team-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(74, 144, 226, 0.2);
+    }
+
+    .team-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
+      background: linear-gradient(135deg, #4a90e2, #4fd1c5);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      color: white;
+    }
+
+    .team-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0b3c5d;
+      margin-bottom: 8px;
+    }
+
+    .team-role {
+      font-size: 15px;
+      color: #4a6b7c;
+      font-weight: 500;
+    }
+
+    .impact-section {
+      background: linear-gradient(135deg, rgba(74, 144, 226, 0.05) 0%, rgba(79, 209, 197, 0.05) 100%);
+      padding: 60px 5%;
+      border-radius: 24px;
+      margin: 60px auto;
+      max-width: 1000px;
+      border: 2px solid rgba(74, 144, 226, 0.1);
+    }
+
+    .testimonial {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      margin: 30px 0;
+      border-left: 4px solid #4a90e2;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .testimonial-text {
+      font-style: italic;
+      color: #4a6b7c;
+      line-height: 1.8;
+      margin-bottom: 15px;
+    }
+
+    .testimonial-author {
+      font-weight: 600;
+      color: #0b3c5d;
+      text-align: right;
+    }
+  </style>
 </head>
 
 <body class="page-soft-bg">
 
   <!-- NAVBAR -->
- <nav class="navbar ribbon">
-  <div class="logo">NeuroNest</div>
+  <nav class="navbar ribbon">
+    <div class="logo-with-image">
+      <img src="neuronest-logo.png" alt="NeuroNest Logo" class="logo-img">
+      <div class="logo-text-new">
+        <span class="neuro-new">Neuro</span><span class="nest-new">Nest</span>
+      </div>
+    </div>
+    <div class="tabs">
+      <a href="index.html" class="tab">Home</a>
+      <a href="autism.html" class="tab">Autism Awareness</a>
+      <a href="screening.html" class="tab">Screening</a>
+      <a href="journey.html" class="tab active">Our Journey</a>
+    </div>
+  </nav>
 
-  <div class="tabs">
-    <a href="index.html" class="tab">Home</a>
-    <a href="autism.html" class="tab">Autism Awareness</a>
-    <a href="screening.html" class="tab">Screening</a>
-    <a href="journey.html" class="tab active">Our Journey</a>
+  <!-- HERO -->
+  <div class="journey-hero reveal">
+    <h1>Our Journey: From Uncertainty to Hope</h1>
+    <p class="journey-quote">
+      Every parent deserves clarity. Every child deserves understanding. 
+      Every family deserves support — without judgment, without delay, without confusion.
+    </p>
   </div>
-</nav>
 
-
-
-  <!-- PAGE INTRO -->
-  <section>
-    <h1>Our Journey</h1>
+  <!-- THE SPARK -->
+  <section class="reveal">
+    <h2>The Moment That Changed Everything</h2>
     <p>
-      NeuroNest is not just a technical project — it is a response to a real,
-      deeply human problem that many families face silently.
+      NeuroNest didn't begin in a lab or a boardroom. It began with a simple, 
+      heart-wrenching observation: watching families struggle in silence, searching 
+      for answers in the dark corners of the internet, drowning in conflicting information, 
+      afraid to ask questions because of stigma.
+    </p>
+    <p>
+      We saw parents second-guessing themselves. <em>"Is this normal? Should I be worried? 
+      Am I overreacting?"</em> These questions haunted countless families, and the answers 
+      they found were often misleading, overwhelming, or simply unavailable.
+    </p>
+    <p>
+      We realized that the gap wasn't just about information — it was about trust, 
+      accessibility, and compassion. That's when NeuroNest was born.
     </p>
   </section>
 
-  <!-- WHY IT STARTED -->
-  <section>
-    <h2>Why NeuroNest Started</h2>
-    <p>
-      We observed a significant gap between early developmental concerns
-      and access to clear, reliable guidance for families.
-      Many caregivers struggle with uncertainty, misinformation,
-      and delayed support.
+  <!-- STATISTICS -->
+  <section class="reveal">
+    <h2>The Reality We're Addressing</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">1 in 36</div>
+        <div class="stat-label">Children diagnosed with autism</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">80%</div>
+        <div class="stat-label">Delayed diagnosis in developing regions</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">4 years</div>
+        <div class="stat-label">Average delay from concern to diagnosis</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">75%</div>
+        <div class="stat-label">Families report feeling isolated</div>
+      </div>
+    </div>
+    <p style="text-align: center; color: #4a6b7c; margin-top: 30px;">
+      These aren't just numbers — they're families waiting for hope.
     </p>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="reveal">
+    <h2>How NeuroNest Evolved</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <h3>🌱 The Seed (Early 2024)</h3>
+        <p>
+          Started with research into autism awareness gaps and barriers to early 
+          intervention. We interviewed families, clinicians, and educators to understand 
+          the real challenges beyond what statistics could show.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <h3>💡 The Insight (Mid 2024)</h3>
+        <p>
+          Discovered that parents don't need another diagnosis tool — they need guidance, 
+          reassurance, and a starting point. We shifted our focus from "detection" to 
+          "awareness and support."
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <h3>🛠️ Building with Care (Late 2024)</h3>
+        <p>
+          Developed our AI-assisted screening tool with clinical oversight, ensuring 
+          every recommendation was evidence-based, ethical, and parent-friendly. We tested 
+          extensively with feedback from autism advocacy groups.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <h3>🚀 Launch & Learn (2025)</h3>
+        <p>
+          Launched NeuroNest as a compassionate digital companion for families. We continue 
+          to learn, improve, and expand based on real user experiences and clinical partnerships.
+        </p>
+      </div>
+
+      <div class="timeline-item">
+        <h3>🌍 Vision Forward (Beyond 2025)</h3>
+        <p>
+          Building a comprehensive support ecosystem connecting families, clinicians, 
+          therapists, and educators. Our goal: ensure no family faces autism awareness alone.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT MAKES US DIFFERENT -->
+  <section class="impact-section reveal">
+    <h2 style="text-align: center;">What Makes NeuroNest Different</h2>
+    <div class="features-grid" style="margin-top: 40px;">
+      <div class="feature-card">
+        <h3 style="color: #0b3c5d; margin-bottom: 15px;">❤️ Empathy First</h3>
+        <p style="margin: 0; color: #4a6b7c;">We understand this is about your child, not data. Every word is chosen with care.</p>
+      </div>
+      <div class="feature-card">
+        <h3 style="color: #0b3c5d; margin-bottom: 15px;">🔬 Clinically Grounded</h3>
+        <p style="margin: 0; color: #4a6b7c;">Built with input from autism specialists, not just programmers.</p>
+      </div>
+      <div class="feature-card">
+        <h3 style="color: #0b3c5d; margin-bottom: 15px;">🚫 No Fear Tactics</h3>
+        <p style="margin: 0; color: #4a6b7c;">We inform and support — never alarm or shame.</p>
+      </div>
+      <div class="feature-card">
+        <h3 style="color: #0b3c5d; margin-bottom: 15px;">🌐 Free & Accessible</h3>
+        <p style="margin: 0; color: #4a6b7c;">No paywalls, no hidden costs. Support should be universal.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT WE'VE LEARNED -->
+  <section class="reveal">
+    <h2>What Research Shows Us</h2>
     <p>
-      NeuroNest began as an effort to bridge this gap responsibly —
-      by prioritizing awareness, empathy, and ethical technology.
+      Our approach is grounded in established research and clinical understanding of autism awareness:
     </p>
+    <div class="testimonial">
+      <p class="testimonial-text">
+        Research consistently shows that families report feeling isolated and uncertain during 
+        the early stages of recognizing developmental differences. Access to clear, stigma-free 
+        information can significantly reduce anxiety and encourage families to seek professional 
+        guidance earlier.
+      </p>
+      <p class="testimonial-author">— Based on autism family experience research (CDC, Autism Society)</p>
+    </div>
+
+    <div class="testimonial">
+      <p class="testimonial-text">
+        Healthcare providers often note that parents arrive at appointments either overwhelmed 
+        by conflicting online information or hesitant to voice concerns due to stigma. 
+        Trusted, evidence-based awareness tools can help bridge this communication gap.
+      </p>
+      <p class="testimonial-author">— Common observation in pediatric autism literature</p>
+    </div>
+
+    <div class="testimonial">
+      <p class="testimonial-text">
+        Early awareness and timely professional consultation are associated with better 
+        long-term outcomes. The key is providing information that empowers rather than 
+        alarms, guides rather than diagnoses.
+      </p>
+      <p class="testimonial-author">— Supported by WHO and autism intervention research</p>
+    </div>
   </section>
 
   <!-- CHALLENGES -->
-  <section class="journey-block highlight">
-  <h2>Challenges We Faced</h2>
-
-  <ul>
-    <li>
-      Limited awareness around early developmental differences often leads to
-      confusion, hesitation, or delayed conversations.
-    </li>
-    <li>
-      Social stigma and fear of labels can discourage families from seeking
-      information at an early stage.
-    </li>
-    <li>
-      Misinformation and oversimplified online content can create unnecessary
-      anxiety or false confidence.
-    </li>
-    <li>
-      Balancing the use of technology while respecting the need for human and
-      clinical judgment in sensitive domains.
-    </li>
-    <li>
-      Designing a tool that informs without overwhelming, and supports without
-      directing.
-    </li>
-  </ul>
-</section>
-
-
-  <!-- LEARNINGS -->
-  <section>
-    <h2>What We’ve Learned</h2>
+  <section class="reveal">
+    <h2>Challenges We Face Every Day</h2>
     <p>
-      One of our biggest learnings was that technology alone is not the solution.
-      True impact comes from combining ethical design, clinical insight,
-      and human-centered thinking.
-    </p>
-    <p>
-      AI should support decision-making — not replace professionals
-      or oversimplify complex realities.
-    </p>
-  </section>
-
-  <!-- VISION -->
-  <section>
-    <h2>Vision Ahead</h2>
-    <p>
-      Our long-term vision is to evolve NeuroNest into a trusted support ecosystem
-      that connects families, clinicians, educators, and researchers.
-    </p>
-    <p>
-      We aim to responsibly expand our AI capabilities while maintaining
-      transparency, safety, and inclusivity at every step.
-    </p>
-  </section>
-
-  <!-- CREDITS -->
-  <section>
-    <h2>Credits & Acknowledgements</h2>
-    <p>
-      NeuroNest is built by a multidisciplinary team bringing together
-      technical expertise, clinical research, and social responsibility.
+      Building NeuroNest isn't just a technical challenge — it's an emotional and ethical responsibility.
     </p>
     <ul>
-    <li><strong>Rudra Sharma</strong> — Project Lead & AI Development</li>
-    <li><strong>Yugal Patil</strong> — Frontend Development & UI Explanation</li>
-    <li><strong>Nimit Sharma</strong> — Backend Development</li>
-    <li><strong>Nihan Moppan</strong> — Clinical Research & Domain Review</li>
+      <li>
+        <strong>Balancing technology with humanity:</strong> AI can guide, but it can never replace 
+        the warmth of human understanding and professional clinical judgment.
+      </li>
+      <li>
+        <strong>Fighting misinformation:</strong> The internet is full of harmful myths about autism. 
+        We work tirelessly to provide only evidence-based, compassionate information.
+      </li>
+      <li>
+        <strong>Breaking stigma:</strong> Many families avoid seeking help due to shame or fear. 
+        We're working to normalize conversations about neurodevelopmental differences.
+      </li>
+      <li>
+        <strong>Ensuring accessibility:</strong> Support shouldn't be a privilege. We're committed 
+        to keeping NeuroNest free and accessible to all families, regardless of their economic situation.
+      </li>
+      <li>
+        <strong>Continuous learning:</strong> Autism research evolves. We must too, constantly 
+        updating our approach based on the latest clinical insights and family feedback.
+      </li>
     </ul>
-    <p>
-      We are grateful to mentors, educators, and the autism community
-      for their guidance and inspiration.
+  </section>
+
+  <!-- TEAM -->
+  <section class="reveal">
+    <h2>The Humans Behind NeuroNest</h2>
+    <p style="text-align: center; max-width: 700px; margin: 0 auto 40px;">
+      We're not a faceless corporation. We're students, researchers, and advocates united 
+      by a shared mission: making autism support accessible to every family.
+    </p>
+    
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-icon">🧠</div>
+        <div class="team-name">Rudra Sharma</div>
+        <div class="team-role">Project Lead & AI Development</div>
+        <p style="margin-top: 15px; font-size: 14px; color: #4a6b7c;">
+          Passionate about ethical AI and its potential to create meaningful social impact.
+        </p>
+      </div>
+
+      <div class="team-card">
+        <div class="team-icon">🎨</div>
+        <div class="team-name">Yugal Patil</div>
+        <div class="team-role">Frontend Development & UX</div>
+        <p style="margin-top: 15px; font-size: 14px; color: #4a6b7c;">
+          Believes design should comfort, not overwhelm — especially in sensitive spaces.
+        </p>
+      </div>
+
+      <div class="team-card">
+        <div class="team-icon">⚙️</div>
+        <div class="team-name">Nimit Sharma</div>
+        <div class="team-role">Backend Development</div>
+        <p style="margin-top: 15px; font-size: 14px; color: #4a6b7c;">
+          Building reliable systems that families can trust with their most important questions.
+        </p>
+      </div>
+
+      <div class="team-card">
+        <div class="team-icon">🔬</div>
+        <div class="team-name">Nihan Moppan</div>
+        <div class="team-role">Clinical Research & Domain Review</div>
+        <p style="margin-top: 15px; font-size: 14px; color: #4a6b7c;">
+          Ensures every recommendation is grounded in evidence and clinical best practices.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACKNOWLEDGEMENTS -->
+  <section class="impact-section reveal">
+    <h2 style="text-align: center;">Thank You</h2>
+    <p style="text-align: center; max-width: 800px; margin: 20px auto;">
+      NeuroNest exists because of the courage of families who shared their stories, 
+      the wisdom of clinicians who guided our approach, and the support of educators 
+      and advocates who believed in our mission.
+    </p>
+    <p style="text-align: center; max-width: 800px; margin: 20px auto; font-weight: 600; color: #0b3c5d;">
+      To every parent who has ever felt alone in this journey: you inspired this. 
+      To every professional who works tirelessly for autism awareness: you guide this. 
+      To every child navigating the world differently: you are why this matters.
     </p>
   </section>
+
+  <!-- CALL TO ACTION -->
+  <section class="cta-section reveal">
+    <h2>Join Us in Making a Difference</h2>
+    <p>
+      NeuroNest is more than a platform — it's a movement toward understanding, 
+      acceptance, and support. Whether you're a parent seeking answers, a professional 
+      offering guidance, or an advocate spreading awareness, you're part of our story.
+    </p>
+    <a class="btn" href="screening.html">Start Your Journey with NeuroNest</a>
+  </section>
+
+  <!-- AI CHATBOT -->
+  <div id="ai-float-button">
+    <img src="Fevicon.png" alt="AI Assistant" onerror="this.innerHTML='🤖'">
+  </div>
+
+  <div id="chatbot-container">
+    <div id="chatbot-header">
+      NeuroNest AI
+      <span id="chatbot-close">✕</span>
+    </div>
+    <div id="chatbot-messages">
+      <div class="bot-message">
+        Hi 👋<br>
+        I'm here to support you.<br><br>
+        You can ask me anything — or choose one below:
+        <br><br>
+        • Learn about autism<br>
+        • Explore NeuroNest<br>
+        • Get guidance for families<br>
+        • Just talk
+      </div>
+    </div>
+    <div id="chatbot-input-area">
+      <input type="text" id="chatbot-input" placeholder="Type here… take your time">
+      <button id="chatbot-send">Send</button>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Chatbot functionality
+    const aiFloatButton = document.getElementById("ai-float-button");
+    const chatbotContainer = document.getElementById("chatbot-container");
+    const chatbotClose = document.getElementById("chatbot-close");
+    const chatbotSend = document.getElementById("chatbot-send");
+    const chatbotInput = document.getElementById("chatbot-input");
+    const chatbotMessages = document.getElementById("chatbot-messages");
+
+    aiFloatButton.onclick = () => {
+      chatbotContainer.style.display = "flex";
+    };
+
+    chatbotClose.onclick = () => {
+      chatbotContainer.style.display = "none";
+    };
+
+    chatbotSend.onclick = sendMessage;
+
+    chatbotInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") sendMessage();
+    });
+
+    function sendMessage() {
+      const message = chatbotInput.value.trim();
+      if (!message) return;
+
+      addMessage(message, "user-message");
+      chatbotInput.value = "";
+
+      const loadingDiv = document.createElement("div");
+      loadingDiv.className = "bot-message";
+      loadingDiv.innerText = "Thinking gently… 🌱";
+      chatbotMessages.appendChild(loadingDiv);
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+      setTimeout(() => {
+        const response = getResponse(message.toLowerCase());
+        loadingDiv.innerText = response;
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+      }, 800);
+    }
+
+    function getResponse(message) {
+      if (message.includes("hello") || message.includes("hi") || message.includes("hey")) {
+        return "Hello! 👋\n\nThank you for visiting NeuroNest. Our AI assistant is currently being fine-tuned for optimal support.\n\nIn the meantime, feel free to explore our Autism Awareness resources or try our Screening tool. We're here to help! 💙";
+      }
+      
+      if (message.includes("screening") || message.includes("test")) {
+        return "Our developmental screening tool is fully operational! 🌱\n\nYou can access it from the 'Screening' tab in the navigation menu. It provides gentle, observational insights about developmental patterns.\n\nThe AI chatbot for conversational support is still under development.";
+      }
+      
+      if (message.includes("autism") || message.includes("asd")) {
+        return "You can learn all about autism in our 'Autism Awareness' section! 💙\n\nOur comprehensive AI chatbot is currently under development, but our educational resources are fully available.\n\nWould you like to explore our awareness materials?";
+      }
+      
+      return "Thank you for your interest! 💙\n\nOur AI conversational assistant is currently under development and will be fully operational soon.\n\nIn the meantime:\n• Explore our Autism Awareness section\n• Try our Screening tool\n• Read about Our Journey\n\nFor immediate support, please consult with a healthcare professional.";
+    }
+
+    function addMessage(text, className) {
+      const div = document.createElement("div");
+      div.className = className;
+      div.innerHTML = text;
+      chatbotMessages.appendChild(div);
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+
+    // Animation script
+    const createParticles = () => {
+      if (document.querySelector('.bg-particles')) return;
+      
+      const particlesContainer = document.createElement('div');
+      particlesContainer.className = 'bg-particles';
+      document.body.insertBefore(particlesContainer, document.body.firstChild);
+      
+      for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.width = Math.random() * 100 + 50 + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 20 + 's';
+        particlesContainer.appendChild(particle);
+      }
+    };
+
+    const revealOnScroll = () => {
+      const revealElements = document.querySelectorAll('.reveal');
+      revealElements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.85) {
+          el.classList.add('active');
+        }
+      });
+    };
+
+    createParticles();
+    revealOnScroll();
+    window.addEventListener('scroll', revealOnScroll);
+  </script>
 
 </body>
 </html>

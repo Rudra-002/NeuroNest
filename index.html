@@ -3,226 +3,613 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NeuroNest</title>
-  <link rel="icon" href="Favicon.png">
+  <title>NeuroNest - Supporting Autism, Empowering Families</title>
+  <link rel="icon" href="Fevicon.png">
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Enhanced styles for index page */
+    .logo-with-image {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .logo-with-image:hover {
+      transform: scale(1.05);
+    }
+
+    .logo-img {
+      width: 45px;
+      height: 45px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
+    }
+
+    .logo-text-new {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+
+    .logo-text-new .neuro-new {
+      color: #0b5394;
+      /* Dark blue like your logo */
+    }
+
+    .logo-text-new .nest-new {
+      color: #6fa8dc;
+      /* Light blue like your logo */
+    }
+
+    /* Stats section */
+    .stats-section {
+      background: linear-gradient(135deg, rgba(11, 83, 148, 0.05) 0%, rgba(111, 168, 220, 0.05) 100%);
+      padding: 60px 5%;
+      margin: 60px auto;
+      border-radius: 24px;
+      max-width: 1200px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 30px 20px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .stat-item:hover {
+      transform: translateY(-5px);
+      border-color: #6fa8dc;
+      box-shadow: 0 8px 30px rgba(111, 168, 220, 0.2);
+    }
+
+    .stat-number {
+      font-size: 48px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #0b5394, #6fa8dc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+
+    .stat-label {
+      font-size: 16px;
+      color: #4a6b7c;
+      font-weight: 600;
+    }
+
+    /* How it works section */
+    .how-it-works {
+      max-width: 1000px;
+      margin: 60px auto;
+      padding: 0 5%;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .step-card {
+      background: white;
+      padding: 35px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      border: 2px solid rgba(111, 168, 220, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #0b5394, #6fa8dc);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .step-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .step-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(111, 168, 220, 0.2);
+    }
+
+    .step-number {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #0b5394, #6fa8dc);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .step-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0b5394;
+      margin-bottom: 12px;
+    }
+
+    .step-description {
+      font-size: 16px;
+      color: #4a6b7c;
+      line-height: 1.7;
+    }
+
+    /* Trust indicators */
+    .trust-section {
+      background: white;
+      padding: 50px 5%;
+      margin: 60px auto;
+      max-width: 1000px;
+      border-radius: 24px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+      text-align: center;
+    }
+
+    .trust-badges {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .trust-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px 25px;
+      background: rgba(111, 168, 220, 0.1);
+      border-radius: 50px;
+      font-weight: 600;
+      color: #0b5394;
+    }
+
+    .trust-icon {
+      font-size: 24px;
+    }
+
+    /* CTA section enhancement */
+    .cta-enhanced {
+      background: linear-gradient(135deg, #0b5394 0%, #6fa8dc 100%);
+      color: white;
+      padding: 80px 5%;
+      margin: 60px auto;
+      border-radius: 24px;
+      text-align: center;
+      max-width: 1000px;
+      box-shadow: 0 12px 40px rgba(11, 83, 148, 0.3);
+    }
+
+    .cta-enhanced h2 {
+      color: white;
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 20px;
+    }
+
+    .cta-enhanced h2::after {
+      display: none;
+    }
+
+    .cta-enhanced p {
+      color: rgba(255, 255, 255, 0.95);
+      font-size: 18px;
+      margin-bottom: 30px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-enhanced .btn {
+      background: white;
+      color: #0b5394;
+      font-weight: 700;
+      padding: 18px 45px;
+      font-size: 18px;
+    }
+
+    .cta-enhanced .btn:hover {
+      background: rgba(255, 255, 255, 0.95);
+      transform: translateY(-3px) scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .logo-img {
+        width: 35px;
+        height: 35px;
+      }
+
+      .logo-text-new {
+        font-size: 24px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body style="background: linear-gradient(to bottom, #e8f6f8, #ffffff);">
 
   <!-- NAVBAR -->
   <nav class="navbar ribbon">
-  <div class="logo">NeuroNest</div>
+    <div class="logo-with-image">
+      <img src="neuronest-logo.png" alt="NeuroNest Logo" class="logo-img">
+      <div class="logo-text-new">
+        <span class="neuro-new">Neuro</span><span class="nest-new">Nest</span>
+      </div>
+    </div>
 
-  <div class="tabs">
-    <a href="index.html" class="tab active">Home</a>
-    <a href="autism.html" class="tab">Autism Awareness</a>
-    <a href="screening.html" class="tab">Screening</a>
-    <a href="journey.html" class="tab">Our Journey</a>
-  </div>
-</nav>
-
+    <div class="tabs">
+      <a href="index.html" class="tab active">Home</a>
+      <a href="autism.html" class="tab">Autism Awareness</a>
+      <a href="screening.html" class="tab">Screening</a>
+      <a href="journey.html" class="tab">Our Journey</a>
+    </div>
+  </nav>
 
   <!-- HERO SECTION -->
-  <section class="hero" style="text-align:center; height:80vh; display:flex; flex-direction:column; justify-content:center; align-items:center;">
-    
-    <img src="NeuroNest.jpg" alt="NeuroNest Logo" width="180">
+  <section class="hero reveal" style="text-align:center; padding: 100px 5% 80px;">
+    <img src="neuronest-logo.png" alt="NeuroNest Logo" width="200" style="filter: drop-shadow(0 10px 40px rgba(11, 83, 148, 0.2)); animation: float-logo 6s ease-in-out infinite;">
 
-    <h1>
-      <span style="color:#0b3c5d;">Neuro</span>
-      <span style="color:#8b5a2b;">Nest</span>
+    <h1 style="margin-top: 30px;">
+      <span style="color:#0b5394;">Neuro</span><span style="color:#6fa8dc;">Nest</span>
     </h1>
 
-    <h2>Supporting Autism, Empowering Families</h2>
+    <h2 style="max-width: 800px; margin: 20px auto 40px;">Supporting Autism Awareness, Empowering Families with Compassionate Guidance</h2>
 
-    <a class="btn" href="autism.html">Learn About Autism</a>
+    <a class="btn" href="autism.html" style="margin-right: 15px;">Learn About Autism</a>
+    <a class="btn" href="screening.html" style="background: linear-gradient(135deg, #6fa8dc 0%, #9cc5e8 100%);">Start Screening</a>
   </section>
+
+  <!-- TRUST INDICATORS -->
+  <div class="trust-section reveal">
+    <h3 style="color: #0b5394; font-size: 20px; margin-bottom: 10px;">Trusted Approach to Autism Awareness</h3>
+    <div class="trust-badges">
+      <div class="trust-badge">
+        <span class="trust-icon">🔬</span>
+        <span>Evidence-Based</span>
+      </div>
+      <div class="trust-badge">
+        <span class="trust-icon">❤️</span>
+        <span>Empathy First</span>
+      </div>
+      <div class="trust-badge">
+        <span class="trust-icon">🌐</span>
+        <span>Free & Accessible</span>
+      </div>
+      <div class="trust-badge">
+        <span class="trust-icon">🔒</span>
+        <span>Private & Safe</span>
+      </div>
+    </div>
+  </div>
 
   <hr>
 
   <!-- PROBLEM -->
-  <section>
-    <h2>The Problem</h2>
+  <section class="reveal">
+    <h2>The Challenge We Address</h2>
     <p>
       Autism Spectrum Disorder affects millions of individuals worldwide, yet access to
       affordable, reliable, and inclusive care remains limited — especially in developing regions.
+      Families often face years of uncertainty before receiving proper guidance.
     </p>
 
     <ul>
-      <li>High cost of therapy and professional support</li>
-      <li>Lack of awareness and widespread misinformation</li>
-      <li>No centralized guidance for families</li>
-      <li>Social stigma delaying early intervention</li>
+      <li>High cost of therapy and professional support creates barriers</li>
+      <li>Lack of awareness and widespread misinformation delays early intervention</li>
+      <li>No centralized, trusted guidance for families to turn to</li>
+      <li>Social stigma preventing families from seeking help early</li>
     </ul>
   </section>
 
+  <!-- STATISTICS -->
+  <div class="stats-section reveal">
+    <h2 style="text-align: center; color: #0b5394;">Understanding the Impact</h2>
+    <p style="text-align: center; max-width: 700px; margin: 10px auto 0; color: #4a6b7c;">
+      These numbers represent real families seeking support and understanding
+    </p>
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-number">1 in 36</div>
+        <div class="stat-label">Children identified with ASD</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">80%</div>
+        <div class="stat-label">Delayed diagnosis in developing regions</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">3-4 yrs</div>
+        <div class="stat-label">Average delay from concern to diagnosis</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">75%</div>
+        <div class="stat-label">Families report feeling isolated</div>
+      </div>
+    </div>
+    <p style="text-align: center; margin-top: 30px; font-size: 14px; color: #4a6b7c;">
+      <em>Sources: CDC, WHO, Autism Society</em>
+    </p>
+  </div>
+
   <!-- SOLUTION -->
-  <section>
+  <section class="reveal">
     <h2>Our Solution — NeuroNest</h2>
     <p>
       NeuroNest is a digital platform designed to make autism awareness and early guidance
-      accessible, ethical, and human-centered using assistive AI.
+      accessible, ethical, and human-centered using assistive AI technology. We bridge the gap
+      between parental concern and professional consultation through evidence-based information.
+    </p>
+    <p>
+      Our approach prioritizes awareness over diagnosis, support over alarm, and empowerment
+      over fear. We provide families with the knowledge and language they need to have
+      meaningful conversations with healthcare providers.
     </p>
   </section>
 
+  <!-- HOW IT WORKS -->
+  <div class="how-it-works reveal">
+    <h2 style="text-align: center;">How NeuroNest Works</h2>
+    <p style="text-align: center; max-width: 700px; margin: 10px auto 40px; color: #4a6b7c;">
+      A simple, three-step process designed with families in mind
+    </p>
+    
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <div class="step-title">Learn & Understand</div>
+        <div class="step-description">
+          Explore our comprehensive autism awareness resources. Understand developmental
+          patterns, reduce stigma, and learn what to look for in your child's growth.
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <div class="step-title">Observe & Screen</div>
+        <div class="step-description">
+          Use our AI-assisted screening tool to observe developmental patterns. This is not
+          a diagnosis — it's a gentle guide to help you articulate concerns to professionals.
+        </div>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <div class="step-title">Connect & Act</div>
+        <div class="step-description">
+          Receive personalized guidance on next steps, questions to ask your doctor, and
+          resources to support your family's journey toward understanding and care.
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- KEY FEATURES -->
-  <section>
-    <h2>Key Features</h2>
-    <ul>
-      <li>AI-assisted developmental screening (non-diagnostic)</li>
-      <li>Clinically informed guidance</li>
-      <li>Awareness-first approach</li>
-      <li>Family and caregiver support focus</li>
-    </ul>
+  <section class="reveal">
+    <h2>What Makes NeuroNest Different</h2>
+    <div class="features-grid" style="margin-top: 40px;">
+      <div class="feature-card">
+        <h3 style="color: #0b5394; margin-bottom: 15px; font-size: 20px;">🔬 Clinically Informed</h3>
+        <p style="margin: 0; color: #4a6b7c; line-height: 1.7;">Every recommendation is grounded in established clinical research and autism best practices</p>
+      </div>
+      <div class="feature-card">
+        <h3 style="color: #0b5394; margin-bottom: 15px; font-size: 20px;">❤️ Awareness First</h3>
+        <p style="margin: 0; color: #4a6b7c; line-height: 1.7;">We educate and support rather than diagnose, helping families understand without overwhelming them</p>
+      </div>
+      <div class="feature-card">
+        <h3 style="color: #0b5394; margin-bottom: 15px; font-size: 20px;">👨‍👩‍👧‍👦 Family Focused</h3>
+        <p style="margin: 0; color: #4a6b7c; line-height: 1.7;">Built specifically for caregivers and families, with language that's accessible and compassionate</p>
+      </div>
+      <div class="feature-card">
+        <h3 style="color: #0b5394; margin-bottom: 15px; font-size: 20px;">🚫 No Fear Tactics</h3>
+        <p style="margin: 0; color: #4a6b7c; line-height: 1.7;">We provide information that empowers rather than alarms, guides rather than diagnoses</p>
+      </div>
+      <div class="feature-card">
+        <h3 style="color: #0b5394; margin-bottom: 15px; font-size: 20px;">🌐 Always Free</h3>
+        <p style="margin: 0; color: #4a6b7c; line-height: 1.7;">No paywalls, no hidden costs. Support and awareness should be accessible to all families</p>
+      </div>
+      <div class="feature-card">
+        <h3 style="color: #0b5394; margin-bottom: 15px; font-size: 20px;">🔒 Private & Secure</h3>
+        <p style="margin: 0; color: #4a6b7c; line-height: 1.7;">Your information remains private. We never share personal data with third parties</p>
+      </div>
+    </div>
   </section>
 
   <!-- SOCIAL IMPACT -->
-  <section>
-    <h2>Social Impact</h2>
+  <section class="reveal">
+    <h2>Our Commitment to Impact</h2>
     <p>
       By promoting early awareness and reducing stigma, NeuroNest aims to empower families,
-      encourage timely support, and improve long-term developmental outcomes.
+      encourage timely professional consultation, and improve long-term developmental outcomes
+      for children on the autism spectrum.
+    </p>
+    <p>
+      We believe that every family deserves access to clear, compassionate, evidence-based
+      information — regardless of their location, economic status, or prior knowledge. That's
+      why NeuroNest will always be free and accessible to all.
     </p>
   </section>
 
   <!-- FINAL CTA -->
-  <section style="text-align:center; margin:60px 0;">
-    <a class="btn" href="screening.html">Start Screening</a>
-  </section>
-
-  <!-- ================== LEISURE AI CHATBOT ================== -->
-
-<div id="ai-float-button">
-  <img src="Fevicon.png" alt="Talk To NeuroNest AI" />
-</div>
-
-<div id="chatbot-container" aria-live="polite">
-  <div id="chatbot-header">
-    NeuroNest AI
-    <span id="chatbot-close" aria-label="Close chat">✖</span>
+  <div class="cta-enhanced reveal">
+    <h2>Start Your Journey with NeuroNest</h2>
+    <p>
+      Whether you're seeking understanding, looking for guidance, or simply want to learn more
+      about autism awareness, NeuroNest is here to support you every step of the way.
+    </p>
+    <a class="btn" href="screening.html">Begin Developmental Screening</a>
   </div>
 
-  <div id="chatbot-messages">
-    <div class="bot-message">
-      Hi 👋<br>
-      I’m here to support you.<br><br>
-      You can ask me anything — or choose one below:
-      <br><br>
-      • Learn about autism<br>
-      • Explore NeuroNest<br>
-      • Get guidance for families<br>
-      • Just talk
+  <!-- AI CHATBOT -->
+  <div id="ai-float-button">
+    <img src="Fevicon.png" alt="Talk To NeuroNest AI" onerror="this.innerHTML='🤖'">
+  </div>
+
+  <div id="chatbot-container" aria-live="polite">
+    <div id="chatbot-header">
+      NeuroNest AI
+      <span id="chatbot-close" aria-label="Close chat">✕</span>
+    </div>
+
+    <div id="chatbot-messages">
+      <div class="bot-message">
+        Hi 👋<br>
+        I'm here to support you.<br><br>
+        You can ask me anything — or choose one below:
+        <br><br>
+        • Learn about autism<br>
+        • Explore NeuroNest<br>
+        • Get guidance for families<br>
+        • Just talk
+      </div>
+    </div>
+
+    <div id="chatbot-input-area">
+      <input type="text" id="chatbot-input" placeholder="Type here… take your time">
+      <button id="chatbot-send">Send</button>
     </div>
   </div>
 
-  <div id="chatbot-input-area">
-    <input
-      type="text"
-      id="chatbot-input"
-      placeholder="Type here… take your time"
-    />
-    <button id="chatbot-send">Send</button>
-  </div>
-</div>
+  <script>
+    const aiFloatButton = document.getElementById("ai-float-button");
+    const chatbotContainer = document.getElementById("chatbot-container");
+    const chatbotClose = document.getElementById("chatbot-close");
+    const chatbotSend = document.getElementById("chatbot-send");
+    const chatbotInput = document.getElementById("chatbot-input");
+    const chatbotMessages = document.getElementById("chatbot-messages");
 
-<script>
-const aiFloatButton = document.getElementById("ai-float-button");
-const chatbotContainer = document.getElementById("chatbot-container");
-const chatbotClose = document.getElementById("chatbot-close");
-const chatbotSend = document.getElementById("chatbot-send");
-const chatbotInput = document.getElementById("chatbot-input");
-const chatbotMessages = document.getElementById("chatbot-messages");
+    aiFloatButton.addEventListener("click", () => {
+      chatbotContainer.style.display = "flex";
+    });
 
-aiFloatButton.addEventListener("click", () => {
-  chatbotContainer.style.display = "flex";
-});
+    chatbotClose.addEventListener("click", () => {
+      chatbotContainer.style.display = "none";
+    });
 
-chatbotClose.addEventListener("click", () => {
-  chatbotContainer.style.display = "none";
-});
+    chatbotSend.onclick = sendMessage;
 
-chatbotSend.onclick = sendMessage;
+    chatbotInput.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        sendMessage();
+      }
+    });
 
-chatbotInput.addEventListener("keypress", (e) => {
-  if (e.key === "Enter") {
-    sendMessage();
-  }
-});
+    function sendMessage() {
+      const message = chatbotInput.value.trim();
+      if (!message) return;
 
-  // try to load local config (silent if not present)
-  (function(){
-    const s = document.createElement('script');
-    s.src = 'config.local.js';
-    s.defer = true;
-    document.head.appendChild(s);
-  })();
+      addMessage(message, "user-message");
+      chatbotInput.value = "";
 
-  // compute backend base at request time so an optionally-loaded config.local.js is honored
-  function getBackendBase() {
-  if (window.BACKEND_OVERRIDE) {
-    console.debug("Using BACKEND_OVERRIDE:", window.BACKEND_OVERRIDE);
-    return window.BACKEND_OVERRIDE;
-  }
+      const loadingDiv = document.createElement("div");
+      loadingDiv.className = "bot-message";
+      loadingDiv.innerText = "Thinking gently… 🌱";
+      chatbotMessages.appendChild(loadingDiv);
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
 
-  if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
-    return "http://localhost:5000";
-  }
+      setTimeout(() => {
+        const response = getResponse(message.toLowerCase());
+        loadingDiv.innerText = response;
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+      }, 800);
+    }
 
-  return "https://neuronest-backend-fa23.onrender.com";
-}
+    function getResponse(message) {
+      if (message.includes("hello") || message.includes("hi") || message.includes("hey")) {
+        return "Hello! 👋\n\nThank you for visiting NeuroNest. Our AI assistant is currently being fine-tuned for optimal support.\n\nIn the meantime, feel free to explore our Autism Awareness resources or try our Screening tool. We're here to help! 💙";
+      }
+      
+      if (message.includes("screening") || message.includes("test")) {
+        return "Our developmental screening tool is fully operational! 🌱\n\nYou can access it from the 'Screening' tab in the navigation menu. It provides gentle, observational insights about developmental patterns.\n\nThe AI chatbot for conversational support is still under development.";
+      }
+      
+      if (message.includes("autism") || message.includes("asd")) {
+        return "You can learn all about autism in our 'Autism Awareness' section! 💙\n\nOur comprehensive AI chatbot is currently under development, but our educational resources are fully available.\n\nWould you like to explore our awareness materials?";
+      }
+      
+      return "Thank you for your interest! 💙\n\nOur AI conversational assistant is currently under development and will be fully operational soon.\n\nIn the meantime:\n• Explore our Autism Awareness section\n• Try our Screening tool\n• Read about Our Journey\n\nFor immediate support, please consult with a healthcare professional.";
+    }
 
+    function addMessage(text, className) {
+      const div = document.createElement("div");
+      div.className = className;
+      div.innerHTML = text;
+      chatbotMessages.appendChild(div);
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
 
-  // Slightly more interactive version - shows you have the foundation
+    // Animation script
+    const createParticles = () => {
+      if (document.querySelector('.bg-particles')) return;
+      
+      const particlesContainer = document.createElement('div');
+      particlesContainer.className = 'bg-particles';
+      document.body.insertBefore(particlesContainer, document.body.firstChild);
+      
+      for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.width = Math.random() * 100 + 50 + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 20 + 's';
+        particlesContainer.appendChild(particle);
+      }
+    };
 
-async function sendMessage() {
-  const message = chatbotInput.value.trim();
-  if (!message) return;
+    const revealOnScroll = () => {
+      const revealElements = document.querySelectorAll('.reveal');
+      revealElements.forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.85) {
+          el.classList.add('active');
+        }
+      });
+    };
 
-  addMessage(message, "user-message");
-  chatbotInput.value = "";
-
-  const loadingDiv = document.createElement("div");
-  loadingDiv.className = "bot-message";
-  loadingDiv.innerText = "Thinking gently… 🌱";
-  chatbotMessages.appendChild(loadingDiv);
-  chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-
-  setTimeout(() => {
-    const response = getResponse(message.toLowerCase());
-    loadingDiv.innerText = response;
-    chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-  }, 800);
-}
-
-function getResponse(message) {
-  // Show basic awareness capability
-  if (message.includes("hello") || message.includes("hi") || message.includes("hey")) {
-    return "Hello! 👋\n\nThank you for visiting NeuroNest. Our AI assistant is currently being fine-tuned for optimal support.\n\nIn the meantime, feel free to explore our Autism Awareness resources or try our Screening tool. We're here to help! 💙";
-  }
-  
-  if (message.includes("screening") || message.includes("test")) {
-    return "Our developmental screening tool is fully operational! 🌱\n\nYou can access it from the 'Screening' tab in the navigation menu. It provides gentle, observational insights about developmental patterns.\n\nThe AI chatbot for conversational support is still under development.";
-  }
-  
-  if (message.includes("autism") || message.includes("asd")) {
-    return "You can learn all about autism in our 'Autism Awareness' section! 💙\n\nOur comprehensive AI chatbot is currently under development, but our educational resources are fully available.\n\nWould you like to explore our awareness materials?";
-  }
-  
-  // Default response
-  return "Thank you for your interest! 💙\n\nOur AI conversational assistant is currently under development and will be fully operational soon.\n\nIn the meantime:\n• Explore our Autism Awareness section\n• Try our Screening tool\n• Read about Our Journey\n\nFor immediate support, please consult with a healthcare professional.";
-}
-
-function addMessage(text, className) {
-  const div = document.createElement("div");
-  div.className = className;
-  div.innerHTML = text;
-  chatbotMessages.appendChild(div);
-  chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-}
-</script>
-
-
-
+    createParticles();
+    revealOnScroll();
+    window.addEventListener('scroll', revealOnScroll);
+  </script>
 
 </body>
 </html>
