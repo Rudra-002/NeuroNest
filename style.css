@@ -115,7 +115,10 @@ nav.navbar,
 .logo {
   font-size: 28px;
   font-weight: 700;
-  color: #0b5394;
+  background: linear-gradient(135deg, #0b5394 0%, #6fa8dc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   letter-spacing: -0.5px;
 }
 
